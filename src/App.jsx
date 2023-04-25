@@ -3,19 +3,17 @@ import apiUrl from '../api.js'
 import { useState } from 'react'
 import './App.css'
 
-import Navbar from './components/Navbar.jsx'
+import Main from './layouts/Main.jsx'
 import Index from './pages/Index.jsx'
-import Footer from './components/Footer.jsx'
+
 
 function App() {
 
   return (
     <>
-      <Navbar />
-      
-      <Index />
-
-      <Footer />
+      <Main>
+        <Index />
+      </Main>
       
 
             {/* <div className='flex justify-evenly  h-[85vh] items-center' >

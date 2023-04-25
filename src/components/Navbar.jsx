@@ -1,5 +1,5 @@
-import logo from "../images/Logo 2 1.png"
-import menu from "../images/Vector 9.png"
+import logo from "/images/Logo 2 1.png"
+import menu from "/images/Vector 9.png"
 
 export default function Navbar() {
     return (
