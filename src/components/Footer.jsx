@@ -1,12 +1,12 @@
-import logo from "../images/Logo 2 1.png"
+import logo from "/images/Logo 2 1.png"
 
 
-import footer from "../images/footer.png"
-import fb from "../images/Facebook.png"
-import vm from "../images/Vimeo.png"
-import tw from "../images/Twitter.png"
-import yt from "../images/Youtube.png"
-import donate from "../images/donate.png"
+import footer from "/images/footer.png"
+import fb from "/images/Facebook.png"
+import vm from "/images/Vimeo.png"
+import tw from "/images/Twitter.png"
+import yt from "/images/Youtube.png"
+import donate from "/images/donate.png"
 
 export default function Footer() {
     return (

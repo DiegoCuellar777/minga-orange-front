@@ -1,13 +1,13 @@
 
 
-import mobile from "../images/Group-3599.png"
-import lupa from "../images/Search.png"
+import mobile from "/images/Group-3599.png"
+import lupa from "/images/Search.png"
 
 export default function Index() {
     return (
     <main className='bg-black h-full w-full'>
 
-        <div className='sm:bg-[url("../images/Group-3599.png")] sm:h-[80vh] w-screen sm:bg-cover my-12 bg-black '>
+        <div className='sm:bg-[url("/images/Group-3599.png")] sm:h-[80vh] w-screen sm:bg-cover my-12 bg-black '>
             <h1 className='sm:hidden md:text-white md:text-7xl md:font-extrabold my-16'>Best manga reader</h1>
             <div className='sm:h-screen w-screen sm:bg-cover md:bg-black flex'>
                 <img src={mobile} alt="" className='sm:hidden md:w-[60%] md:h-[110vh] md:px-[10%] md:object-fit md:object-cover md:object-left  '/>
