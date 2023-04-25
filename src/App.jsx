@@ -2,78 +2,18 @@ import apiUrl from '../api.js'
 
 import { useState } from 'react'
 import './App.css'
-import logo from "./images/Logo 2 1.png"
-import menu from "./images/Vector 9.png"
-import mobile from "./images/Group-3599.png"
-import lupa from "./images/Search.png"
-import footer from "./images/footer.png"
 
-import fb from "./images/Facebook.png"
-import vm from "./images/Vimeo.png"
-import tw from "./images/Twitter.png"
-import yt from "./images/Youtube.png"
+import Main from './layouts/Main.jsx'
+import Index from './pages/Index.jsx'
 
-import donate from "./images/donate.png"
-
-import mob1 from "./images/mob1.png"
-import mob2 from "./images/mob2.png"
-import mob3 from "./images/mob3.png"
-import mob4 from "./images/mob4.png"
 
 function App() {
-  const [count, setCount] = useState(0)
-  let titulo = "welcolme to mindhub!"
-  console.log(apiUrl)
-  console.log(process.env.NODE_ENV);
 
   return (
     <>
-      <main className='bg-black h-full w-full'>
-          <nav className='h-[13.33%] w-screen flex justify-between items-center px-5 py-2 md:border-b border-slate-600'>
-              <div className='h-8 w-12 px-2 flex flex-col justify-around  items-center '>
-                <img src={menu} alt="logo" />
-                <img src={menu} alt="logo" />
-                <img src={menu} alt="logo" />
-              </div>
-              <img src={logo} alt="logo" className='h-[60%]'/>
-          </nav>
-          <div className='sm:bg-[url("./images/Group-3599.png")] sm:h-full w-screen sm:bg-cover my-12 bg-black '>
-            <h1 className='sm:hidden md:text-white md:text-7xl md:font-extrabold my-16'>Best manga reader</h1>
-            <div className='sm:h-screen w-screen sm:bg-cover md:bg-black flex'>
-              <img src={mobile} alt="" className='sm:hidden md:w-[60%] md:h-[110vh] md:px-[10%] md:object-cover'/>
-              <div className='sm:bg-[#000000b1] sm:h-[100%] md:w-[40%] flex flex-col sm:justify-center sm:gap-9 md:gap-12 md:bg-gradient-to-r from-[#0a0b2861] to-[#0c08508d] md:backdrop-blur-xl'>
-                <div>
-                  <h2 className=' text-white sm:text-4xl md:text-5xl font-medium sm:tracking-wider sm:mx-3 sm:text-center md:text-left md:w-[75%]'>Your favourite manga reader <span className='md:text-5xl md:font-medium sm:hidden'>😏</span></h2>
-                  <h2 className=' text-white sm:text-4xl sm:font-medium sm:mx-2 sm:my-2 sm:text-center md:hidden'>😏</h2>
-                </div>
-                  
-                  <p className='text-white sm:mx-8 sm:text-center md:text-justify md:w-[50%]'>is an exceptional app for all manga lovers. With a wide range of titles available, from classics to the latest releases, this app is perfect for those who want to read manga anytime, anywhere.</p>
-                
-                <div className='flex items-center justify-between bg-[#dfd3d332] backdrop-blur-md px-4 py-2 sm:mx-4 rounded-md md:w-[75%] border-solid border-2 border-white'>
-                  <img src={lupa} alt="" />
-                  <span className='text-white tracking-wider text-lg w-[100%]'>Search mangas</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </main>
-
-        <footer className='w-[100%] bg-black sm:flex sm:flex-col sm:justify-center '>
-          <img src={footer} alt="" className='w-[100%] rounded-b-full'/>
-          <div className='flex md:justify-around md:p-24 md:items-center sm:flex-col sm:items-center sm:gap-12 sm:w-[100%] sm:p-6'>
-            <div className='md:w-[15%] flex justify-between sm:w-[80%]'>
-              <a href="" className='text-white'>Home</a>
-              <a href="" className='text-white'>Mangas</a>
-            </div>
-            <img src={logo} alt="logo" className='md:h-[30%] sd:w-[80%]'/>
-            <div className='md:w-[15%] flex flex-col gap-5'>
-              <div className='flex md:w-[100%] justify-between'>
-                <img src={fb} alt="" /><img src={tw} alt="" /><img src={vm} alt="" /><img src={yt} alt="" />
-              </div>
-              <img src={donate} alt="" />
-            </div>
-          </div>
-        </footer>
+      <Main>
+        <Index />
+      </Main>
       
 
             {/* <div className='flex justify-evenly  h-[85vh] items-center' >
