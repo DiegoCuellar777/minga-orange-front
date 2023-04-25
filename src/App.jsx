@@ -1,3 +1,5 @@
+import apiUrl from '../api'
+
 import { useState } from 'react'
 import './App.css'
 import logo from "./images/Logo 2 1.png"
@@ -21,10 +23,11 @@ import mob4 from "./images/mob4.png"
 function App() {
   const [count, setCount] = useState(0)
   let titulo = "welcolme to mindhub!"
+  console.log(apiUrl)
+  console.log(process.env.NODE_ENV);
 
   return (
     <>
-    <body className='bg-black'>
       <main className='bg-black h-full w-full'>
           <nav className='h-[13.33%] w-screen flex justify-between items-center px-5 py-2 md:border-b border-slate-600'>
               <div className='h-8 w-12 px-2 flex flex-col justify-around  items-center '>
@@ -71,7 +74,6 @@ function App() {
             </div>
           </div>
         </footer>
-    </body>
       
 
             {/* <div className='flex justify-evenly  h-[85vh] items-center' >
