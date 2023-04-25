@@ -1,4 +1,4 @@
-import apiUrl from '../api'
+import apiUrl from '../api.js'
 
 import { useState } from 'react'
 import './App.css'
