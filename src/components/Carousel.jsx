@@ -34,10 +34,7 @@ useEffect(() => {
     return () => clearInterval(interval);
   }, [imagenesCarousel.length]);
 
-  let [imagenesCarousel, setImages] = useState([])
-  console.log(imagenesCarousel);
-  let [counter, setCounter] = useState(0)
-  
+
 
 
 
