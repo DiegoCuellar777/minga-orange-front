@@ -16,6 +16,7 @@ export default function Carousel() {
     []   // Array de dependencias vacio ya que necesitamos pushear una unica vez al montarse el componente (y despues esos datos no deberian cambiar)
   )
 
+
   let [imagenesCarousel, setImages] = useState([])
   const [currentImage, setCurrentImage] = useState(0);
 
@@ -33,10 +34,19 @@ useEffect(() => {
     return () => clearInterval(interval);
   }, [imagenesCarousel.length]);
 
+  let [imagenesCarousel, setImages] = useState([])
+  console.log(imagenesCarousel);
+  let [counter, setCounter] = useState(0)
+  
+
+
 
   return (
     <div className="sm:hidden md:w-[60%] flex justify-between  items-center md:px-[5%]">
+
       <img src={imagenesCarousel[currentImage]?.cover_photo} alt="" className='sm:hidden md:w-[90%] md:h-[110vh] md:object-fit md:object-cover md:object-center  '/>
+
+    
     </div>
   )
 }
