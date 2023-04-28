@@ -1,23 +1,14 @@
-import { useState, useEffect } from "react"
-import axios from "axios"
-import apiUrl from "../../api"
-
-
-import mobile from "/images/Group-3599.png"
-import left from "/images/left.png"
-import right from "/images/right.png"
-
-
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import apiUrl from '../../api';
 
 export default function Carousel() {
+    useEffect(
+        () => { axios(apiUrl+"carousels").then(res => setImages(res.data.carousels)).catch(err=> console.log(err)) },
+        []   // Array de dependencias vacio ya que necesitamos pushear una unica vez al montarse el componente (y despues esos datos no deberian cambiar)
+    )
 
-  useEffect(
-    () => { axios(apiUrl+"carousels").then(res => setImages(res.data.carousels)).catch(err=> console.log(err)) },
-    []   // Array de dependencias vacio ya que necesitamos pushear una unica vez al montarse el componente (y despues esos datos no deberian cambiar)
-  )
-
-
-  let [imagenesCarousel, setImages] = useState([])
+    let [imagenesCarousel, setImages] = useState([])
   const [currentImage, setCurrentImage] = useState(0);
 
 
@@ -33,10 +24,6 @@ useEffect(() => {
     }, 4000);
     return () => clearInterval(interval);
   }, [imagenesCarousel.length]);
-
-
-
-
 
   return (
     <div className="sm:hidden md:w-[60%] flex justify-between  items-center md:px-[5%]">
