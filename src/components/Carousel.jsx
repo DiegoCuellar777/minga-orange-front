@@ -4,33 +4,29 @@ import apiUrl from '../../api';
 
 export default function Carousel() {
     useEffect(
-        () => { axios(apiUrl+"carousels").then(res => setImages(res.data.carousels)).catch(err=> console.log(err)) },
-        []   // Array de dependencias vacio ya que necesitamos pushear una unica vez al montarse el componente (y despues esos datos no deberian cambiar)
+        () => {
+            axios(apiUrl + 'carousels').then(res => setImages(res.data.carousels)).catch(err => console.log(err))
+        },
+        [] //array vacio, ya que necesitamos fetchear una sola vez al montar el componente
     )
 
-    let [imagenesCarousel, setImages] = useState([])
-  const [currentImage, setCurrentImage] = useState(0);
+    let [images, setImages] = useState([])
+    console.log(images)
+    let [counter, setCounter] = useState(0);
 
+    useEffect(() => {
+        // Cambiar de imagen cada 4 segundos
+        const interval = setInterval(() => {
+            setCounter(prevCounter => (prevCounter + 1) % images.length);
+        }, 4000);
+        return () => {
+            clearInterval(interval); // Limpiar el intervalo al desmontar el componente
+        };
+    }, [images]);
 
-useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImage((currentImage) => {
-        if (currentImage === imagenesCarousel.length - 1) {
-          return 0;
-        } else {
-          return currentImage + 1;
-        }
-      });
-    }, 4000);
-    return () => clearInterval(interval);
-  }, [imagenesCarousel.length]);
-
-  return (
-    <div className="sm:hidden md:w-[60%] flex justify-between  items-center md:px-[5%]">
-
-      <img src={imagenesCarousel[currentImage]?.cover_photo} alt="" className='sm:hidden md:w-[90%] md:h-[110vh] md:object-fit md:object-cover md:object-center  '/>
-
-    
-    </div>
-  )
+    return (
+        <div>
+            <img className="hidden sm:flex h-full w-[100vw] md:w-[40%] md:ml-[8%] object-cover filter brightness-50 md:filter md:brightness-100" src={images[counter]?.cover_photo} alt="" />
+        </div>
+    )
 }

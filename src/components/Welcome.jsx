@@ -1,5 +1,5 @@
 import React from 'react'
-import ButtonWelcome from './ButtonWelcome'
+import ButtonWelcome from '../components/ButtonWelcome'
 
 export default function Welcome() {
     return (
