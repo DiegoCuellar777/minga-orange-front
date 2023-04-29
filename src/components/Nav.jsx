@@ -49,13 +49,16 @@ export default function Nav() {
                             </svg>
                         </button>
                     </div>
-                    <div className="w-[100%] text-white flex-col mt-3 cel:order-3 sm:order-2 flex items-center">
+                    <div className="w-[100%] h-[100%] text-white flex-col mt-3 cel:order-3 sm:order-2 flex items-center justify-between">
                         <ul className="w-[80%] flex flex-col items-center gap-2 text-center">
-                            <a className=" p-2 bg-white text-black rounded-md w-[70%]" href="#">Home</a>
-                            <a className=" p-2  text-white rounded-md w-[70%]" href="#">Mangas</a>
-                            <a className=" p-2  text-white rounded-md w-[70%]" href="#">My Mangas</a>
-                            <a className=" p-2  text-white rounded-md w-[70%]" href="#">Favourites</a>
-                            <a className=" p-2  text-white rounded-md w-[70%]" href="#">Logout</a>
+                            <button className=" p-2 bg-white text-black rounded-md w-[70%]" href="#">Home</button>
+                            <button className=" p-2  text-white rounded-md w-[70%]" href="#">Mangas</button>
+                            <button className=" p-2  text-white rounded-md w-[70%]" href="#">My Mangas</button>
+                            <button className=" p-2  text-white rounded-md w-[70%]" href="#">Favourites</button>
+                            <button className=" p-2  text-white rounded-md w-[70%]" href="#">Logout</button>
+                        </ul>
+                        <ul className="w-[80%] flex justify-center items-center gap-2 text-center">
+                            <button className=" p-2 mb-4 bg-white text-black rounded-md w-[70%]" href="#">New Author</button>
                         </ul>
                     </div>
                 </div>
