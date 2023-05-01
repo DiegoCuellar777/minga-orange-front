@@ -12,7 +12,7 @@ export default function Nav() {
         setIsOffcanvasOpen(false);
     };
     return (
-        <nav className="h-[10vh] flex justify-between p-4">
+        <nav className="h-[10vh] flex justify-between p-4 w-full fixed z-10 border-b-[1px] border-gradient-to-r from-transparent to-transparent via-white">
             <button className="contents" onClick={handleMenuClick}>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"

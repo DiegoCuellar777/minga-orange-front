@@ -1,6 +1,6 @@
 import Main from "./layouts/Main"
 import Index from "./pages/Index";
-import AuthForm from "./pages/AuthForm";
+import AuthorForm from "./pages/AuthorForm";
 
 import "./App.css";
 import apiUrl from "../api";
@@ -11,7 +11,7 @@ function App() {
         <div>
             <Main>
                 <Index />
-                <AuthForm />
+                <AuthorForm />
             </Main>
         </div>
     );
