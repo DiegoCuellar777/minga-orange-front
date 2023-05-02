@@ -1,14 +1,17 @@
 import React from 'react';
-import Footer from "../components/Footer";
-import Nav from "../components/Nav";
+import { useLocation } from 'react-router-dom';
+import Footer from '../components/Footer';
+import Nav from '../components/Nav';
 import { Outlet } from 'react-router-dom';
 
 export default function Main() {
+    const location = useLocation();
+    const viewNav = location.pathname === '/' || location.pathname === '/author-form';
     return (
         <div className="min-h-screen bg-black">
-            <Nav />
+            {viewNav && <Nav />}
             <Outlet />
             <Footer />
         </div>
-    )
+    );
 }
