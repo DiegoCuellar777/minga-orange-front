@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link as Anchor } from "react-router-dom"
 import Logo from "../assets/images/Logo.png";
+import { Link } from 'react-router-dom';
 
 export default function Nav() {
     const [isOffcanvasOpen, setIsOffcanvasOpen] = useState(false);
@@ -13,7 +14,7 @@ export default function Nav() {
         setIsOffcanvasOpen(false);
     };
     return (
-        <nav className="h-[10vh] flex justify-between p-4">
+        <nav className="h-[10vh] flex justify-between p-4 w-full fixed z-10 border-b-[1px] border-gradient-to-r from-transparent to-transparent via-white">
             <button className="contents" onClick={handleMenuClick}>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -50,13 +51,16 @@ export default function Nav() {
                             </svg>
                         </button>
                     </div>
-                    <div className="w-[100%] text-white flex-col mt-3 cel:order-3 sm:order-2 flex items-center">
+                    <div className="w-[100%] h-[100%] text-white flex-col mt-3 cel:order-3 sm:order-2 flex items-center justify-between">
                         <ul className="w-[80%] flex flex-col items-center gap-2 text-center">
                             <Anchor to={'/'} className=" p-2 bg-white text-black rounded-md w-[70%]">Home</Anchor>
                             <Anchor to={'/mangas-form'} className=" p-2 bg-white text-black rounded-md w-[70%]">Mangas</Anchor>
                             <Anchor className=" p-2 bg-white text-black rounded-md w-[70%]">My Mangas</Anchor>
                             <Anchor className=" p-2 bg-white text-black rounded-md w-[70%]">Favourites</Anchor>
                             <Anchor className=" p-2 bg-white text-black rounded-md w-[70%]">Logout</Anchor>
+                        </ul>
+                        <ul className="w-[80%] flex justify-center items-center gap-2 text-center">
+                            <Link to="/author-form" className=" p-2 mb-4 bg-white text-black rounded-md w-[70%]">New Author</Link>
                         </ul>
                     </div>
                 </div>
