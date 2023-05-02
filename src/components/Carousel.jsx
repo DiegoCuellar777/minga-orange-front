@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import apiUrl from '../../api';
 
@@ -11,7 +11,6 @@ export default function Carousel() {
     )
 
     let [images, setImages] = useState([])
-    console.log(images)
     let [counter, setCounter] = useState(0);
 
     useEffect(() => {
