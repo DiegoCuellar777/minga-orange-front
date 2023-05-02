@@ -9,10 +9,10 @@ function App() {
     console.log(import.meta.env.VITE_API);
     return (
         <div>
-            <Main>
-                <Index />
-                <AuthorForm />
-            </Main>
+            <>
+                {/* <Index /> */}
+                {/* <AuthorForm /> */}
+            </>
         </div>
     );
 }

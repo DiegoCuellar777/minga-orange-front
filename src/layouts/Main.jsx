@@ -1,12 +1,13 @@
 import React from 'react';
 import Footer from "../components/Footer";
 import Nav from "../components/Nav";
+import { Outlet } from 'react-router-dom';
 
-export default function Main({ children }) {
+export default function Main() {
     return (
         <div className="min-h-screen bg-black">
             <Nav />
-            {children}
+            <Outlet />
             <Footer />
         </div>
     )
