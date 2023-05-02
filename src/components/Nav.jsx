@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link as Anchor } from "react-router-dom"
 import Logo from "../assets/images/Logo.png";
 
 export default function Nav() {
@@ -51,11 +52,11 @@ export default function Nav() {
                     </div>
                     <div className="w-[100%] text-white flex-col mt-3 cel:order-3 sm:order-2 flex items-center">
                         <ul className="w-[80%] flex flex-col items-center gap-2 text-center">
-                            <a className=" p-2 bg-white text-black rounded-md w-[70%]" href="#">Home</a>
-                            <a className=" p-2  text-white rounded-md w-[70%]" href="#">Mangas</a>
-                            <a className=" p-2  text-white rounded-md w-[70%]" href="#">My Mangas</a>
-                            <a className=" p-2  text-white rounded-md w-[70%]" href="#">Favourites</a>
-                            <a className=" p-2  text-white rounded-md w-[70%]" href="#">Logout</a>
+                            <Anchor to={'/'} className=" p-2 bg-white text-black rounded-md w-[70%]">Home</Anchor>
+                            <Anchor to={'/mangas-form'} className=" p-2 bg-white text-black rounded-md w-[70%]">Mangas</Anchor>
+                            <Anchor className=" p-2 bg-white text-black rounded-md w-[70%]">My Mangas</Anchor>
+                            <Anchor className=" p-2 bg-white text-black rounded-md w-[70%]">Favourites</Anchor>
+                            <Anchor className=" p-2 bg-white text-black rounded-md w-[70%]">Logout</Anchor>
                         </ul>
                     </div>
                 </div>
