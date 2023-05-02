@@ -11,7 +11,6 @@ export default function Carousel() {
     )
 
     let [images, setImages] = useState([])
-    console.log(images)
     let [counter, setCounter] = useState(0);
 
     useEffect(() => {

@@ -1,15 +1,16 @@
 import {createBrowserRouter} from "react-router-dom";
-import App from "../App.jsx";
-import Layout from "../layouts/Main.jsx"
-import Register from "../pages/Register.jsx";
-import LogIn from "../pages/LogIn.jsx"
-
+import Main from "../layouts/Main.jsx"
+/* import Register from "../pages/Register.jsx";
+import LogIn from "../pages/LogIn.jsx" */
+import Index from "../pages/Index";
+import AuthorForm from "../pages/AuthorForm.jsx";
 
 const routes = createBrowserRouter([
-    { path: "/", element:<Layout/>, children:[
-        {path: "/", element: <App/>},
-        {path: "/register", element: <Register/>},
-        {path: "/LogIn", element: <LogIn />}
+    { path: "/", element:<Main/>, children:[
+        {path: "/", element: <Index/>},
+        /* {path: "/register", element: <Register/>},
+        {path: "/LogIn", element: <LogIn />} */
+        {path: "/author-form", element: <AuthorForm/>},
     ]}
 ])
 
