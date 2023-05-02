@@ -54,7 +54,7 @@ export default function Nav() {
                     <div className="w-[100%] h-[100%] text-white flex-col mt-3 cel:order-3 sm:order-2 flex items-center justify-between">
                         <ul className="w-[80%] flex flex-col items-center gap-2 text-center">
                             <Anchor to={'/'} className=" p-2 bg-white text-black rounded-md w-[70%]">Home</Anchor>
-                            <Anchor to={'/mangas-form'} className=" p-2 bg-white text-black rounded-md w-[70%]">Mangas</Anchor>
+                            <Anchor to={'/manga-form'} className=" p-2 bg-white text-black rounded-md w-[70%]">Mangas</Anchor>
                             <Anchor className=" p-2 bg-white text-black rounded-md w-[70%]">My Mangas</Anchor>
                             <Anchor className=" p-2 bg-white text-black rounded-md w-[70%]">Favourites</Anchor>
                             <Anchor className=" p-2 bg-white text-black rounded-md w-[70%]">Logout</Anchor>
