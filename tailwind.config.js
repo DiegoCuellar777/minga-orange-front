@@ -13,7 +13,7 @@ module.exports = {
 			},
 			screens: {
 				'cel': '320px',
-			}
+			},
 			backgroundImage: {
 				'backgroundManga': "url('../assets/images/lect.png')"
 			},
