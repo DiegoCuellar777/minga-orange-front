@@ -1,5 +1,7 @@
 import axios from 'axios';
 import React, { useState, useEffect, useRef } from 'react';
+import Swal from 'sweetalert2';
+import apiUrl from '../../api'
 
 export default function AuthorForm() {
     const [$cityCountry, setCityCountry] = useState('');
@@ -12,7 +14,7 @@ export default function AuthorForm() {
     const cityCountry = useRef();
     const date = useRef();
     const photo = useRef();
-
+    console.log(apiUrl)
     useEffect(() => {
         const inputDate = document.querySelector('#date-input');
         const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
@@ -24,18 +26,14 @@ export default function AuthorForm() {
         setProfileImageUrl(event.target.value);
     };
 
-    const capitalizeWords = (str) => {
-        return str.replace(/\b\w/g, (c) => c.toUpperCase());
-    };
-
-    const handleInputChange = (setState) => (event) => {
-        const value = event.target.value;
-        setState(capitalizeWords(value));
-    };
-
     function handleForm(e) {
         e.preventDefault();
-        const [city, country] = cityCountry.current.value.split(",");
+        const cityCountryValue = cityCountry.current.value;
+        const [city, country] = cityCountryValue.includes(",") ? cityCountryValue.split(",").map(value => value.trim()) : ["", ""];
+        if (!city && !country) {
+            Swal.fire('City and country required \n Example: Jujuy,Argentina');
+            return;
+        }
         let data = {
             name: name.current.value,
             last_name: last_name.current.value,
@@ -46,11 +44,12 @@ export default function AuthorForm() {
         axios.post("http://localhost:8000/api/authors", data)
             .then((res) => {
                 console.log(res.data)
-                alert("Author created successfully")
+                Swal.fire('Author successfully created')
             })
             .catch(err => {
+                const joi = err.response.data.message
                 console.log(err.response.data.message)
-                alert(err.response.data.message)
+                Swal.fire(`${joi}`)
             })
         console.log(data);
     }
@@ -62,9 +61,9 @@ export default function AuthorForm() {
                 alt="user avatar"
             />
             <div className='flex flex-col justify-center w-[50%] sm:w-[30%] text-white font-montserrat font-normal	text-base'>
-                <input className='bg-transparent border-b-2 border-white my-4 px-2' type="text" placeholder="Insert name" value={$name} onChange={handleInputChange(setFirstName)} ref={name} />
-                <input className='bg-transparent border-b-2 border-white my-4 px-2' type="text" placeholder="Insert last name" value={$last_name} onChange={handleInputChange(setLastName)} ref={last_name} />
-                <input className='bg-transparent border-b-2 border-white my-4 px-2' type="text" placeholder="City, country" value={$cityCountry} onChange={handleInputChange(setCityCountry)} ref={cityCountry} />
+                <input className='bg-transparent border-b-2 border-white my-4 px-2' type="text" placeholder="Insert name" defaultValue={$name} ref={name} />
+                <input className='bg-transparent border-b-2 border-white my-4 px-2' type="text" placeholder="Insert last name" defaultValue={$last_name} ref={last_name} />
+                <input className='bg-transparent border-b-2 border-white my-4 px-2' type="text" placeholder="City, country" defaultValue={$cityCountry} ref={cityCountry} />
                 <input className='bg-transparent border-b-2 border-white my-4 px-2' type="text" placeholder={$currentDate} readOnly id="date-input" ref={date} />
                 <input className='bg-transparent border-b-2 border-white my-4 px-2' type="url" placeholder="URL profile image" onChange={handleProfileImageChange} ref={photo} />
                 <button className=" p-2 mb-4 bg-white text-black rounded-md font-bold text-2xl my-4" type="submit">Send</button>
