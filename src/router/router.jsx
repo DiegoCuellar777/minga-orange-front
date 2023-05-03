@@ -6,12 +6,16 @@ import Index from "../pages/Index";
 import AuthorForm from "../pages/AuthorForm.jsx";
 import MangaForm from "../pages/MangaForm.jsx";
 import EditChapter from "../pages/EditChapter.jsx";
+import MangaForm from '../pages/MangaForm.jsx'
+import ErrorPage from "../pages/ErrorPage.jsx";
+
+let token = localStorage.getItem("token")
 
 const routes = createBrowserRouter([
-    { path: "/", element:<Main/>, children:[
+    { path: "/", element:<Main/>, errorElement:<ErrorPage />, children:[
         {path: "/", element: <Index/>},
         {path: "/register", element: <Register/>},
-        {path: "/LogIn", element: <LogIn />},
+        {path: "/LogIn", element: token? <Index />: <LogIn />},
         {path: "/author-form", element: <AuthorForm/>},
         {path: "/manga-form", element: <MangaForm/>},
         {path: "/chapter-form", element: <EditChapter/>},

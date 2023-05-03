@@ -2,6 +2,7 @@ import React from "react"
 import { Link as Anchor } from "react-router-dom"
 import { useRef } from "react";
 import axios from "axios";
+import apiUrl from "../../api";
 
 export default function Register() {
 
@@ -29,9 +30,11 @@ export default function Register() {
             notifications: inputNotifications,
         };
 
-        console.log(dataUser)
-        axios.post("http://localhost:8000/auth/signup", dataUser)
-        .then(res=>console.log(res))
+        axios.post(apiUrl+"auth/signup", dataUser)
+        .then(res=>{
+            console.log(res)
+            alert(res.data.message)
+        })
         .catch(err=>{
             console.log(err.response.data.message)
             alert(err.response.data.message)
