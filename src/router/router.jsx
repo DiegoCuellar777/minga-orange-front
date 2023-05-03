@@ -4,7 +4,8 @@ import Register from "../pages/Register.jsx";
 import LogIn from "../pages/LogIn.jsx"
 import Index from "../pages/Index";
 import AuthorForm from "../pages/AuthorForm.jsx";
-
+import MangaForm from "../pages/MangaForm.jsx";
+import EditChapter from "../pages/EditChapter.jsx";
 import MangaForm from '../pages/MangaForm.jsx'
 import ErrorPage from "../pages/ErrorPage.jsx";
 
@@ -17,6 +18,7 @@ const routes = createBrowserRouter([
         {path: "/LogIn", element: token? <Index />: <LogIn />},
         {path: "/author-form", element: <AuthorForm/>},
         {path: "/manga-form", element: <MangaForm/>},
+        {path: "/chapter-form", element: <EditChapter/>},
     ]}
 ])
 
