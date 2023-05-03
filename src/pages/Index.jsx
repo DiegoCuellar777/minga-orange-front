@@ -9,9 +9,9 @@ export default function Index() {
         <main id="Home">
             {<Presentation />}
             <div className="min-h-[100vh] relative">
-                {/* <Carousel/>
-                <Welcome/> */}
-                <EditChapter/>
+                <Carousel/>
+                <Welcome/>
+                {/* <EditChapter/> */}
             </div>
         </main>
     )
