@@ -5,6 +5,7 @@ import LogIn from "../pages/LogIn.jsx"
 import Index from "../pages/Index";
 import AuthorForm from "../pages/AuthorForm.jsx";
 import MangaForm from "../pages/MangaForm.jsx";
+import EditChapter from "../pages/EditChapter.jsx";
 
 const routes = createBrowserRouter([
     { path: "/", element:<Main/>, children:[
@@ -13,6 +14,7 @@ const routes = createBrowserRouter([
         {path: "/LogIn", element: <LogIn />},
         {path: "/author-form", element: <AuthorForm/>},
         {path: "/manga-form", element: <MangaForm/>},
+        {path: "/chapter-form", element: <EditChapter/>},
     ]}
 ])
 
