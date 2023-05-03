@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { Link as Anchor } from "react-router-dom"
 import Logo from "../assets/images/Logo.png";
 import { Link } from 'react-router-dom';
+import apiUrl from "../../api";
+import axios from "axios";
+
 
 export default function Nav() {
     const [isOffcanvasOpen, setIsOffcanvasOpen] = useState(false);
@@ -13,6 +16,11 @@ export default function Nav() {
     const handleCloseOffcanvas = () => {
         setIsOffcanvasOpen(false);
     };
+
+    let token = localStorage.getItem("token")
+    let user = JSON.parse(localStorage.getItem("user"))
+    
+
     return (
         <nav className="h-[10vh] flex justify-between p-4 w-full fixed z-10 border-b-[1px] border-gradient-to-r from-transparent to-transparent via-white">
             <button className="contents" onClick={handleMenuClick}>
@@ -33,19 +41,16 @@ export default function Nav() {
             </button>
             <img className="h-[5vh]" src={Logo} alt="logo" />
             {isOffcanvasOpen && (
-                <div className="flex flex-col items-center w-auto h-[100%] fixed bg-gradient-to-r from-neutral-700 to-black order-2 top-0 left-0 text-black z-50">
-                    <div className="flex justify-between">
-                        <div className="flex items-center p-2">
-                            <img className="bg-black w-[40px] h-[40px] rounded-[100%] mr-2" src="https://gluc.mx/u/fotografias/m/2020/4/9/f850x638-25498_102987_5050.jpg" alt="" />
+                <div className="flex flex-col items-center w-[20rem] h-[100%] fixed bg-gradient-to-r from-neutral-700 to-black order-2 top-0 left-0 text-black z-50">
+                    <div className="flex justify-between w-[100%] items-center">
+                        {token && <div className="flex items-center p-2">
+                            <img className="bg-black w-[40px] h-[40px] rounded-[100%] mr-2" src={user?.photo} alt="" />
                             <div className="ml-1 text-white">
-                                <h4>Carlos Arturo Torres</h4>
-                                <h5>carlosat95@gmail.com</h5>
+                                <h5>{user?.email}</h5>
                             </div>
-                        </div>
-                        <button
-                            className="text-white rounded p-2"
-                            onClick={handleCloseOffcanvas}
-                        >
+                        </div>}
+                        
+                        <button className="text-white rounded p-2 w-[100%] flex justify-end " onClick={handleCloseOffcanvas}>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                             </svg>
@@ -53,14 +58,16 @@ export default function Nav() {
                     </div>
                     <div className="w-[100%] h-[100%] text-white flex-col mt-3 cel:order-3 sm:order-2 flex items-center justify-between">
                         <ul className="w-[80%] flex flex-col items-center gap-2 text-center">
-                            <Anchor to={'/'} className=" p-2 bg-white text-black rounded-md w-[70%]">Home</Anchor>
-                            <Anchor to={'/manga-form'} className=" p-2 bg-white text-black rounded-md w-[70%]">Mangas</Anchor>
-                            <Anchor className=" p-2 bg-white text-black rounded-md w-[70%]">My Mangas</Anchor>
-                            <Anchor className=" p-2 bg-white text-black rounded-md w-[70%]">Favourites</Anchor>
-                            <Anchor className=" p-2 bg-white text-black rounded-md w-[70%]">Logout</Anchor>
+                            {!token && <Anchor to={'/LogIn'} className=" p-2 bg-white text-black rounded-md w-[70%]">Log In</Anchor>}
+                            {!token && <Anchor to={'/register'} className=" p-2 bg-white text-black rounded-md w-[70%]">Register</Anchor>}
+                            {token &&<Anchor to={'/'} className=" p-2 bg-white text-black rounded-md w-[70%]">Home</Anchor>}
+                            {token && <Anchor to={'/manga-form'} className=" p-2 bg-white text-black rounded-md w-[70%]">Mangas</Anchor>}
+                            {token && <Anchor className=" p-2 bg-white text-black rounded-md w-[70%]">My Mangas</Anchor>}
+                            {token && <Anchor className=" p-2 bg-white text-black rounded-md w-[70%]">Favourites</Anchor>}
+                            {token && <Anchor className=" p-2 bg-white text-black rounded-md w-[70%]">Logout</Anchor>}
                         </ul>
                         <ul className="w-[80%] flex justify-center items-center gap-2 text-center">
-                            <Link to="/author-form" className=" p-2 mb-4 bg-white text-black rounded-md w-[70%]">New Author</Link>
+                            {token &&<Link to="/author-form" className=" p-2 mb-4 bg-white text-black rounded-md w-[70%]">New Author</Link>}
                         </ul>
                     </div>
                 </div>
