@@ -14,7 +14,7 @@ export default function Nav() {
         setIsOffcanvasOpen(false);
     };
     return (
-        <nav className="h-[10vh] flex justify-between p-4 w-full fixed z-10 border-b-[1px] border-gradient-to-r from-transparent to-transparent via-white">
+        <nav className="h-[10vh] flex justify-between p-4 w-full fixed z-10 s border-gradient-to-r from-transparent to-transparent via-white">
             <button className="contents" onClick={handleMenuClick}>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -31,7 +31,7 @@ export default function Nav() {
                     />
                 </svg>
             </button>
-            <img className="h-[5vh]" src={Logo} alt="logo" />
+            <img className="h-[5vh]" src={Logo} alt="logo" to={'/'} />
             {isOffcanvasOpen && (
                 <div className="flex flex-col items-center w-auto h-[100%] fixed bg-gradient-to-r from-neutral-700 to-black order-2 top-0 left-0 text-black z-50">
                     <div className="flex justify-between">
@@ -54,7 +54,7 @@ export default function Nav() {
                     <div className="w-[100%] h-[100%] text-white flex-col mt-3 cel:order-3 sm:order-2 flex items-center justify-between">
                         <ul className="w-[80%] flex flex-col items-center gap-2 text-center">
                             <Anchor to={'/'} className=" p-2 bg-white text-black rounded-md w-[70%]">Home</Anchor>
-                            <Anchor to={'/mangas-form'} className=" p-2 bg-white text-black rounded-md w-[70%]">Mangas</Anchor>
+                            <Anchor to={'/manga-form'} className=" p-2 bg-white text-black rounded-md w-[70%]">Mangas</Anchor>
                             <Anchor className=" p-2 bg-white text-black rounded-md w-[70%]">My Mangas</Anchor>
                             <Anchor className=" p-2 bg-white text-black rounded-md w-[70%]">Favourites</Anchor>
                             <Anchor className=" p-2 bg-white text-black rounded-md w-[70%]">Logout</Anchor>
