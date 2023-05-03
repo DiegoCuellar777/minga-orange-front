@@ -6,7 +6,7 @@ import { Outlet } from 'react-router-dom';
 
 export default function Main() {
     const location = useLocation();
-    const viewNav = location.pathname === '/' || location.pathname === '/author-form';
+    const viewNav = location.pathname === '/' || location.pathname === '/author-form' || location.pathname === "/manga-form" ;
     return (
         <div className="min-h-screen bg-black">
             {viewNav && <Nav />}

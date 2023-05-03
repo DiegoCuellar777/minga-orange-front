@@ -11,6 +11,9 @@ module.exports = {
 				montserrat: ["Montserrat", "sans-serif"],
 				poppins: ["Poppins", "sans-serif"],
 			},
+			screens: {
+				'cel': '320px',
+			},
 			backgroundImage: {
 				'backgroundManga': "url('../assets/images/lect.png')"
 			},
