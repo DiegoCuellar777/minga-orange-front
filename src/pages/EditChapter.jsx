@@ -12,7 +12,8 @@ export default function EditChapter() {
   let coverPhoto = useRef()
   let order = useRef()
   let pages = useRef()
-
+  let token = localStorage.getItem('token')
+  let headers = {headers:{'Authorization':`Bearer ${token}`}}
   function handleForm(e) {
     e.preventDefault()
 
@@ -22,7 +23,7 @@ export default function EditChapter() {
       order: order.current.value,
       pages: pages.current.value.split(',')
     }
-    axios.post(apiUrl + 'chapters/chapter-form', data)
+    axios.post(apiUrl + 'chapters/chapter-form',data,headers)
       .then(res => {
         console.log(res)
         setSuccess(true)
@@ -30,8 +31,8 @@ export default function EditChapter() {
       .catch(err => {
         console.log(err)
         setError(err)
-        const errors = err.response.data.message.map((text, i) => {
-          return <li className=" p-1 font-montserrat not-italic font-normal text-xl leading-4 m-1 underline decoration-red-600" key={i}>{text}</li>
+        const errors = err.response.data.message?.map((text, i) => {
+          return <li className=" p-1 font-montserrat not-italic font-normal text-xl leading-4 m-1 text-red-500" key={i}>{text}</li>
         })
         setmessage(errors)
         console.log(err.response.data.message);
@@ -48,17 +49,17 @@ export default function EditChapter() {
         <div className="w-1/2 h-screen flex flex-col justify-evenly items-center relative">
           <h2 className=" text-white w-[228px] h-[44px] not-italic font-normal text-4xl">New Chapter</h2>
           {error && (<div className="absolute w-[300px] h-48 bg-white flex flex-col justify-center items-center rounded-md">
-            <ul className=" mt-3 flex flex-col list-disc">
+            <ul className=" mt-3 flex flex-col list-disc ml-[1.5rem]">
               {message}
             </ul>
-            <button onClick={toggleError} className="w-[300px] h-6 border-t-2 border-black flex justify-center items-center mt-auto mb-0 text-blue-700 font-medium" value='closed'>Closed</button>
+            <button onClick={toggleError} className="w-[300px] h-12 border-t-2 border-gray-600 flex justify-center items-center mt-auto mb-0 text-blue-700 font-medium" value='closed'>Closed</button>
           </div>)}
           {success && (
             <div className="absolute w-[300px] h-32 bg-white flex flex-col justify-center items-center rounded-md">
               <p className="font-bold text-green-600">Form submitted successfully!</p>
-              <div className="mt-auto mb-0 flex flex-wrap justify-center">
-                <Anchor to={'/'} className="w-[300px] h-6 border-t-2 border-black  mt-auto mb-0 text-blue-700 font-medium text-center">Return to home</Anchor>
-                <button onClick={() => setSuccess(false)} className="w-[300px] h-6 border-t-2 border-black  mt-auto mb-0 text-blue-700 font-medium" value='closed'>create another chapter</button>
+              <div className="mt-auto mb-0 flex flex-wrap justify-center items-center">
+                <Anchor to={'/'} className="w-[300px] h-8 border-t-2 border-gray-600  mt-auto mb-0 text-blue-700 font-medium text-center">Return to home</Anchor>
+                <button onClick={() => setSuccess(false)} className="w-[300px] h-8 border-t-2 border-gray-600  mt-auto mb-0 text-blue-700 font-medium" value='closed'>create another chapter</button>
               </div>
             </div>
           )}
