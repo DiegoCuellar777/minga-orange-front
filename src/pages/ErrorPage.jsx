@@ -5,7 +5,7 @@ function ErrorPage() {
     <div className="flex flex-col h-screen justify-center items-center">
       <h1 className="text-6xl font-bold text-red-600 mb-6">404</h1>
       <p className="text-gray-600 text-xl mb-6">
-        Esta pagina al parecer no esta funcionando.
+        Esta pagina al parecer no esta funcionando o no existe.
       </p>
       <Link
         to="/"
