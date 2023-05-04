@@ -6,7 +6,6 @@ import Index from "../pages/Index";
 import AuthorForm from "../pages/AuthorForm.jsx";
 import MangaForm from "../pages/MangaForm.jsx";
 import EditChapter from "../pages/EditChapter.jsx";
-import MangaForm from '../pages/MangaForm.jsx'
 import ErrorPage from "../pages/ErrorPage.jsx";
 
 let token = localStorage.getItem("token")

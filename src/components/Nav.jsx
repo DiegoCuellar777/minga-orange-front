@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link as Anchor } from "react-router-dom"
+import { Link as Anchor, useNavigate} from "react-router-dom"
 import Logo from "../assets/images/Logo.png";
 import { Link } from 'react-router-dom';
 import apiUrl from "../../api";
@@ -8,7 +8,9 @@ import axios from "axios";
 
 export default function Nav() {
     const [isOffcanvasOpen, setIsOffcanvasOpen] = useState(false);
-
+    
+    const navigate = useNavigate()
+    
     const handleMenuClick = () => {
         setIsOffcanvasOpen(!isOffcanvasOpen);
     };
@@ -19,7 +21,21 @@ export default function Nav() {
     
     let token = localStorage.getItem("token")
     let user = JSON.parse(localStorage.getItem("user"))
+    let headers = {headers:{'Authorization':`Bearer ${token}`}}
+
+
+    function backHome() {
+        axios.post(apiUrl+"auth/signout", null, headers)
+            .then(res=>{
+                localStorage.removeItem("token")
+                localStorage.removeItem("user")
+                navigate("/")
+            })
+            .catch(err=>alert(err))
+    }
     
+
+
     return (
         <nav className="h-[10vh] flex justify-between p-4 w-full fixed z-10 s border-gradient-to-r from-transparent to-transparent via-white">
             <button className="contents" onClick={handleMenuClick}>
@@ -57,14 +73,14 @@ export default function Nav() {
                     </div>
                     <div className="w-[100%] h-[100%] text-white flex-col mt-3 cel:order-3 sm:order-2 flex items-center justify-between">
                         <ul className="w-[80%] flex flex-col items-center gap-2 text-center">
-                                                     
-                            {!token && <Anchor to={'/LogIn'} className=" p-2 bg-white text-black rounded-md w-[70%]">Log In</Anchor>}
+
+                            {!token && <Anchor to={'/LogIn'} className=" p-2 bg-white text-black rounded-md w-[70%]" onClick={handleCloseOffcanvas}>Log In</Anchor>}
                             {!token && <Anchor to={'/register'} className=" p-2 bg-white text-black rounded-md w-[70%]">Register</Anchor>}
                             {token &&<Anchor to={'/'} className=" p-2 bg-white text-black rounded-md w-[70%]">Home</Anchor>}
                             {token && <Anchor to={'/manga-form'} className=" p-2 bg-white text-black rounded-md w-[70%]">Mangas</Anchor>}
                             {token && <Anchor className=" p-2 bg-white text-black rounded-md w-[70%]">My Mangas</Anchor>}
                             {token && <Anchor className=" p-2 bg-white text-black rounded-md w-[70%]">Favourites</Anchor>}
-                            {token && <Anchor className=" p-2 bg-white text-black rounded-md w-[70%]">Logout</Anchor>}
+                            {token && <Anchor className=" p-2 bg-white text-black rounded-md w-[70%]" onClick={backHome}>Logout</Anchor>}
                             <Anchor to={'/chapter-form'} className=" p-2 bg-white text-black rounded-md w-[70%]">New Chapter</Anchor>
 
                         </ul>
