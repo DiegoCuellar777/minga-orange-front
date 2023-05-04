@@ -5,22 +5,22 @@ import logoFooter from "../assets/images/Logo.png";
 
 export default function Footer() {
     return (
-        <footer className="bg-black text-white">
+        <footer className="bg-transparent  text-white">
             <img
                 className="w-[100vw] rounded-[100%_100%_100%_100%/_0%_0%_100%_100%]"
                 src={imgFooter}
                 alt="Footer"
             />
             <div className="bg-black h-auto flex flex-col sm:flex-row justify-center items-center py-12 gap-4">
-                <div className="w-[30%] flex justify-center items-center gap-4">
+                <div className="w-[30%] flex justify-evenly items-center px-10">
                     <a
-                        className="mx-[0.5rem] md:m-0 font-poppins text-base font-normal	"
+                        className="mx-[0.5rem] md:m-0 font-poppins text-base font-normal"
                         href="#Home"
                     >
                         Home
                     </a>
                     <a
-                        className="mx-[0.5rem] md:m-0 font-poppins text-base font-normal	"
+                        className="mx-[0.5rem] md:m-0 font-poppins text-base font-normal"
                         href="#Mangas"
                     >
                         Mangas
@@ -28,18 +28,18 @@ export default function Footer() {
                 </div>
                 <div className="w-[30%] flex justify-center items-center">
                     <img
-                        className="h-[10vh]"
+                        className="h-[5.5vh]"
                         src={logoFooter}
                         alt="Logo"
                     />
                 </div>
-                <div className="w-[30%] flex justify-center items-center flex-col">
-                    <div className="w-[100%] sm:w-[50%] flex justify-between">
+                <div className="w-[50%] md:w-[30%] flex justify-center items-center flex-col">
+                    <div className="w-[100%] mb-2 md:mb-4 sm:w-[50%] flex justify-between">
                         <a
                             rel="noopener noreferrer"
                             href="#"
                             title="Facebook"
-                            className="flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 fill-white"
+                            className="flex items-center justify-center rounded-full fill-white"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -54,7 +54,7 @@ export default function Footer() {
                             rel="noopener noreferrer"
                             href="#"
                             title="Twitter"
-                            className="flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 fill-white"
+                            className="flex items-center justify-center rounded-full  fill-white"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -69,7 +69,7 @@ export default function Footer() {
                             rel="noopener noreferrer"
                             href="#"
                             title="Vimeo"
-                            className="flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 fill-white"
+                            className="flex items-center justify-center rounded-full fill-white"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -84,7 +84,7 @@ export default function Footer() {
                             rel="noopener noreferrer"
                             href="#"
                             title="Vimeo"
-                            className="flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 fill-white"
+                            className="flex items-center justify-center rounded-full fill-white"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -96,8 +96,11 @@ export default function Footer() {
                             </svg>{" "}
                         </a>
                     </div>
-                    <button className="w-[100%] sm:w-[50%] bg-gradient-to-r from-[#DEE4EA] to-[#F9FCFF] text-black rounded-[4px] p-[8px] flex justify-center">
-                        Donate{" "}
+                    <button
+                        className="w-full sm:w-1/2 bg-white rounded-[5px] text-black rounded-4px p-3 flex justify-center 
+                        hover:bg-[#0e0d0d] hover:text-white transition duration-200"
+                    >
+                        Donate
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"

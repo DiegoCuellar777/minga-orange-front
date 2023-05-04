@@ -25,7 +25,7 @@ export default function Carousel() {
 
     return (
         <div>
-            <img className="hidden sm:flex h-full w-[100vw] md:w-[40%] md:ml-[8%] object-cover filter brightness-50 md:filter md:brightness-100" src={images[counter]?.cover_photo} alt="" />
+            <img className="hidden sm:flex h-full w-full lg:w-[30rem] filter brightness-50 md:filter md:brightness-100" src={images[counter]?.cover_photo} alt="" />
         </div>
     )
 }

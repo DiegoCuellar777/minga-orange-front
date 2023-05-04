@@ -24,11 +24,12 @@ const routes = createBrowserRouter([
             { path: "/manga-form", element: <MangaForm /> },
             { path: "/chapter-form", element: <EditChapter /> },
         ],
-    },
+    },{path: "/manga-form", element: token? <MangaForm/> : <ErrorPage/>},
     {
         path: "*", // cualquier ruta desconocida
         element: <Navigate to="/" />, // redirigir a la página de inicio
     },
 ]);
+
 
 export default routes;

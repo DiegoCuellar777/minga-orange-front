@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link as Anchor } from "react-router-dom"
 import Logo from "../assets/images/Logo.png";
-import { Link } from 'react-router-dom';
 import apiUrl from "../../api";
 import axios from "axios";
 
@@ -18,6 +17,7 @@ export default function Nav() {
     };
 
     let token = localStorage.getItem("token")
+    let user = JSON.parse(localStorage.getItem("user"))
     let role = JSON.parse(localStorage.getItem("user"))?.role
     let photo = JSON.parse(localStorage.getItem("user"))?.photo
     let email = JSON.parse(localStorage.getItem("user"))?.email
@@ -42,7 +42,7 @@ export default function Nav() {
             </button>
             <img className="h-[5vh]" src={Logo} alt="logo" to={'/'} />
             {isOffcanvasOpen && (
-                <div className="flex flex-col items-center w-[20rem] h-[100%] fixed bg-gradient-to-r from-neutral-700 to-black order-2 top-0 left-0 text-black z-50">
+                <div className="flex flex-col items-center w-full md:w-[20rem] h-[100%] fixed bg-gradient-to-r hover:bg-[#89977928] from-neutral-500 to-[#000000e3] order-2 top-0 left-0 text-black z-50">
                     <div className="flex justify-between w-[100%] items-center">
                         {token && <div className="flex items-center p-2">
                             <img className="bg-black w-[40px] h-[40px] rounded-[100%] mr-2" src={photo} alt="" />
@@ -57,21 +57,22 @@ export default function Nav() {
                         </button>
                     </div>
                     <div className="w-[100%] h-[100%] text-white flex-col mt-3 cel:order-3 sm:order-2 flex items-center justify-between">
-                        <ul className="w-[80%] flex flex-col items-center gap-2 text-center">
-                            {!token && <Anchor to={'/LogIn'} className=" p-2 bg-white text-black rounded-md w-[70%]">Log In</Anchor>}
-                            {!token && <Anchor to={'/register'} className=" p-2 bg-white text-black rounded-md w-[70%]">Register</Anchor>}
-                            {token && <Anchor to={'/'} className=" p-2 bg-white text-black rounded-md w-[70%]">Home</Anchor>}
-                            {token && <Anchor to={'/manga-form'} className=" p-2 bg-white text-black rounded-md w-[70%]">Mangas</Anchor>}
-                            {token && <Anchor className=" p-2 bg-white text-black rounded-md w-[70%]">My Mangas</Anchor>}
-                            {token && <Anchor className=" p-2 bg-white text-black rounded-md w-[70%]">Favourites</Anchor>}
-                            {token && <Anchor className=" p-2 bg-white text-black rounded-md w-[70%]">Logout</Anchor>}
-                            {token && <Anchor to={'/chapter-form'} className=" p-2 bg-white text-black rounded-md w-[70%]">New Chapter</Anchor>}
+                        <ul className="w-[80%] flex flex-col items-center gap-2 text-center">  
+                            {!token && <Anchor to={'/LogIn'} className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]">Log In</Anchor>}
+                            {!token && <Anchor to={'/register'} className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]">Register</Anchor>}
+                            {token && <Anchor to={'/'} className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]">Home</Anchor>}
+                            {token && <Anchor to={'/manga-form'} className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]">Mangas</Anchor>}
+                            {token && <Anchor className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]">My Mangas</Anchor>}
+                            {(role===1 || role === 2) && <Anchor className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]">New Manga</Anchor>}
+                            {token && <Anchor className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]">Favourites</Anchor>}
+                            {token && <Anchor className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]">Logout</Anchor>}
+                            <token && <Anchor to={'/chapter-form'} className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]">New Chapter</Anchor>
                         </ul>
                         <ul className="w-[80%] flex justify-center items-center gap-2 text-center">
                             {token && role === 0 &&
-                                <Link to="/author-form" className="p-2 mb-4 bg-white text-black rounded-md w-[70%]">
+                                <Anchor to="/author-form" className="p-2 mb-4 bg-white text-black rounded-md w-[70%]">
                                     New Author
-                                </Link>
+                                </Anchor>
                             }
                         </ul>
                     </div>
