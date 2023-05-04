@@ -22,7 +22,6 @@ export default function Nav() {
     let user = JSON.parse(localStorage.getItem("user"))
     let headers = {headers:{'Authorization':`Bearer ${token}`}}
 
-
     function backHome() {
         axios.post(apiUrl+"auth/signout", null, headers)
             .then(res=>{
@@ -72,7 +71,6 @@ export default function Nav() {
                         </button>
                     </div>
                     <div className="w-[100%] h-[100%] text-white flex-col mt-3 cel:order-3 sm:order-2 flex items-center justify-between">
-
                         <ul className="w-[80%] flex flex-col items-center gap-2 text-center">  
                             {!token && <Anchor to={'/LogIn'} className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]" onClick={handleCloseOffcanvas}>Log In</Anchor>}
                             {!token && <Anchor to={'/register'} className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]">Register</Anchor>}
@@ -83,7 +81,6 @@ export default function Nav() {
                             {token && <Anchor className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]">Favourites</Anchor>}
                             {token && <Anchor className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]" onClick={backHome}>Logout</Anchor>}
                             {token && <Anchor to={'/chapter-form'} className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]">New Chapter</Anchor>}
-
                         </ul>
                         <ul className="w-[80%] flex justify-center items-center gap-2 text-center">
                             {token && role === 0 &&
