@@ -5,7 +5,7 @@ import axios from "axios";
 import apiUrl from "../../api";
 import Swal from 'sweetalert2';
 
-export default function Register() {
+export default function Register(props) {
 
     const name = useRef()
     const email = useRef()
@@ -38,7 +38,7 @@ export default function Register() {
             localStorage.setItem("token", res.data.token)
             localStorage.setItem("user", JSON.stringify(res.data.user))
             Swal.fire({
-                title: 'Usera created successfully',
+                title: 'User created successfully',
                 icon: 'success',
                 showConfirmButton: true,
                 confirmButtonText: 'OK',
@@ -55,10 +55,10 @@ export default function Register() {
 
     return (
         <div className="flex">
-            <img src="/public/images/pexels-aleksandar-pasaric-2339009 1.png" className="w-[70%] h-screen object-cover" alt="" />
-            <div className="bg-white w-[30%] flex flex-col justify-center items-center">
+            <img src="/public/images/pexels-aleksandar-pasaric-2339009 1.png" className="w-[70%] h-screen object-cover hidden md:block" alt="" />
+            <div className="bg-white w-full md:w-[30%] py-10 md:py-0 flex flex-col justify-center items-center">
                 <img src="/public/images/Logo 2 1.png" className="h-[3rem]" alt="" />
-                <div className="flex flex-col items-center  mt-6">
+                <div className="flex flex-col items-center mt-6">
                     <h2 className="font-bold text-center text-3xl/[39px]">Welcome!</h2>
                     <span className="text-center text-xs px-10 py-4">Discover manga, manhua and manhwa, track your progress, have fun, read manga.</span>
                     <form className="flex flex-col w-[75%]">
@@ -76,7 +76,14 @@ export default function Register() {
                     <button className="flex border w-[75%] py-3 rounded-lg border-[#1f1f1f78] justify-center ">
                         <img src="/public/images/Google.png" alt="" /><span>Sign up with Google</span>
                     </button>
-                    <span className="w-[75%] text-xs mt-4">Already have an account? <Anchor to="/LogIn" className="text-red-600 font-bold">Log in</Anchor></span>
+                    <div className="flex flex-col items-center">
+                        {props.setShow ? (
+                            <span className="w-[75%] text-xs mt-4">Already have an account? <span onClick={()=>props.setShow(true)} className="cursor-pointer text-red-600 font-bold">Log in</span></span>
+                        ) : (
+                            <Anchor to="/login" className="w-[75%] text-xs mt-4">Already have an account? <span className="cursor-pointer text-red-600 font-bold">Sig in</span></Anchor>
+                        )}
+                    </div>
+                    
                 </div>
             </div>
         </div>
