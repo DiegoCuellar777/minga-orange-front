@@ -1,8 +1,9 @@
 import React from "react"
-import { Link as Anchor } from "react-router-dom"
+import { Link as Anchor, useNavigate } from "react-router-dom"
 import { useRef } from "react";
 import axios from "axios";
 import apiUrl from "../../api";
+import Swal from 'sweetalert2';
 
 export default function Register() {
 
@@ -11,6 +12,8 @@ export default function Register() {
     const photo = useRef()
     const password = useRef()
     const notifications = useRef()
+
+    const navigate = useNavigate()
 
     const handleForm = (e) => {
 
@@ -32,12 +35,20 @@ export default function Register() {
 
         axios.post(apiUrl+"auth/signup", dataUser)
         .then(res=>{
-            console.log(res)
-            alert(res.data.message)
+            localStorage.setItem("token", res.data.token)
+            localStorage.setItem("user", JSON.stringify(res.data.user))
+            Swal.fire({
+                title: 'Usera created successfully',
+                icon: 'success',
+                showConfirmButton: true,
+                confirmButtonText: 'OK',
+                allowOutsideClick: false
+            })
+            navigate("/")
         })
         .catch(err=>{
             console.log(err.response.data.message)
-            alert(err.response.data.message)
+            Swal.fire(`${err.response.data.message}`)
         }) 
     } 
 
