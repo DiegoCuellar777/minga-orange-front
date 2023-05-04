@@ -19,6 +19,7 @@ export default function Nav() {
     
     let token = localStorage.getItem("token")
     let user = JSON.parse(localStorage.getItem("user"))
+    let role = JSON.parse(localStorage.getItem("user"))?.role
     
     return (
         <nav className="h-[10vh] flex justify-between p-4 w-full fixed z-10 s border-gradient-to-r from-transparent to-transparent via-white">
@@ -65,7 +66,7 @@ export default function Nav() {
                             {token && <Anchor className=" p-2 bg-white text-black rounded-md w-[70%]">My Mangas</Anchor>}
                             {token && <Anchor className=" p-2 bg-white text-black rounded-md w-[70%]">Favourites</Anchor>}
                             {token && <Anchor className=" p-2 bg-white text-black rounded-md w-[70%]">Logout</Anchor>}
-                            <Anchor to={'/chapter-form'} className=" p-2 bg-white text-black rounded-md w-[70%]">New Chapter</Anchor>
+                            {(role===1 || role === 2) && <Anchor to={'/chapter-form'} className=" p-2 bg-white text-black rounded-md w-[70%]">New Chapter</Anchor>}
 
                         </ul>
                         <ul className="w-[80%] flex justify-center items-center gap-2 text-center">
