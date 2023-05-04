@@ -2,7 +2,7 @@ import ButtonWelcome from '../components/ButtonWelcome'
 
 export default function Welcome() {
     return ( 
-        <div className="flex items-center flex-col z-0 w-full lg:w-[24rem] sm:px-[10rem] lg:px-0 absolute lg:relative">
+        <div className="flex px-4 items-center flex-col z-0 w-full lg:w-[24rem] sm:px-[10rem] lg:px-0 absolute sm:top-0 lg:relative">
             <div>
                 <h1 className="text-white font-[600] text-[2.5rem] text-center lg:text-start lg:text-[2.4rem] mt-[7rem] lg:mt-0 mb-[1rem]">
                     Your favourite manga reader 😏
