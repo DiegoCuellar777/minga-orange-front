@@ -82,12 +82,12 @@ export default function Nav() {
                             {(role===1 || role === 2) && <Anchor className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]">New Manga</Anchor>}
                             {token && <Anchor className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]">Favourites</Anchor>}
                             {token && <Anchor className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]" onClick={backHome}>Logout</Anchor>}
-                            <token && <Anchor to={'/chapter-form'} className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]">New Chapter</Anchor>
+                            {token && <Anchor to={'/chapter-form'} className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]">New Chapter</Anchor>}
 
                         </ul>
                         <ul className="w-[80%] flex justify-center items-center gap-2 text-center">
                             {token && role === 0 &&
-                                <Anchor to="/author-form" className="p-2 mb-4 bg-white text-black rounded-md w-[70%]">
+                                <Anchor to="/author-form" className="p-2 mb-4 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]">
                                     New Author
                                 </Anchor>
                             }
