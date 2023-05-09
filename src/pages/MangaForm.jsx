@@ -1,16 +1,21 @@
 import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { useRef } from 'react';
-import apiUrl from '../../api.js';
+import apiUrl from '../../api';
 import axios from 'axios';
 import Nav from '../components/Nav.jsx';
 import Swal from 'sweetalert2'
 
 function MangaForm() {
+    //    let { id } = useParams()
     const [category, setCategory] = useState([]);
 
-    useEffect(() => {
-        fetchData();
-    }, []);
+    useEffect(
+        () => {
+            fetchData();
+        },
+        []
+    )
 
     function fetchData() {
         axios.get(apiUrl + 'categories')
@@ -19,7 +24,7 @@ function MangaForm() {
             })
             .catch((error) => {
                 console.log(error);
-            });
+            })
     }
     console.log(category)
     let title = useRef(null)
@@ -35,20 +40,20 @@ function MangaForm() {
         }
         console.log(data)
         axios.post(apiUrl + 'mangas', data)
-        .then((res) => {
-            console.log(res.data)
-            Swal.fire({
-                title: 'Author successfully created',
-                icon: 'success',
-                showConfirmButton: true,
-                confirmButtonText: 'Go to homepage',
-                allowOutsideClick: false,
-        })
-        }).catch(err => {
-            const joi = err.response.data.message
-            console.log(err.response.data.message)
-            Swal.fire(`${joi}`)
-        })
+            .then((res) => {
+                console.log(res.data)
+                Swal.fire({
+                    title: 'Manga successfully created',
+                    icon: 'success',
+                    showConfirmButton: true,
+                    confirmButtonText: 'Go to homepage',
+                    allowOutsideClick: false,
+                })
+            }).catch(err => {
+                const joi = err.response.data.message
+                console.log(err.response.data.message)
+                Swal.fire(`${joi}`)
+            })
     }
     return (
         <div>
