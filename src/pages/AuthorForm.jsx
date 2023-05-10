@@ -15,7 +15,6 @@ export default function AuthorForm() {
     const cityCountry = useRef();
     const date = useRef();
     const photo = useRef();
-    console.log(apiUrl)
     useEffect(() => {
         const inputDate = document.querySelector('#date-input');
         const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
@@ -51,11 +50,6 @@ export default function AuthorForm() {
                     confirmButtonText: 'Go to homepage',
                     allowOutsideClick: false,
                 }).then(() => {
-                    const user = JSON.parse(localStorage.getItem("user"));
-                    user.photo = $photo; // actualiza la propiedad "photo" del objeto "user"
-                    localStorage.setItem("user", JSON.stringify(user)); // guarda el objeto "user" actualizado en el localStorage
-                    user.role = 1;
-                    localStorage.setItem("user", JSON.stringify(user));
                     navigate('/');
                 });
             })
