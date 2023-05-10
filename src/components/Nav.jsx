@@ -38,7 +38,7 @@ export default function Nav() {
     let email = JSON.parse(localStorage.getItem("user"))?.email
 
     return (
-        <nav className="h-[10vh] flex justify-between p-4 w-full fixed z-10 s border-gradient-to-r from-transparent to-transparent via-white">
+        <nav className="h-[10vh] flex justify-between p-4 w-full z-10 s border-gradient-to-r from-transparent to-transparent via-white">
             <button className="contents" onClick={handleMenuClick}>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"

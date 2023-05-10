@@ -15,6 +15,7 @@ export default function Main() {
             {viewNav && <Nav />}
                 <Outlet />
             {!viewFooter && <Footer />}
+
         </div>
     );
 }

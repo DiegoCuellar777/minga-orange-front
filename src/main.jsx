@@ -1,3 +1,4 @@
+import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import { RouterProvider } from "react-router-dom"
@@ -13,3 +14,4 @@ ReactDOM.createRoot(document.getElementById("root"))
     );
 //el enrutador tiene que ser hijo del almacenamiento de estado globales
 //para que cada interfaz del enrutador pueda acceder a los estados globales
+
