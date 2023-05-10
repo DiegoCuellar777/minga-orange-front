@@ -1,14 +1,14 @@
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import apiUrl from '../../api';
 import axios from 'axios';
-import Nav from '../components/Nav.jsx';
 import Swal from 'sweetalert2'
+import SelectCategories from '../components/SelectCategories.jsx';
 
 function MangaForm() {
     //    let { id } = useParams()
     const [category, setCategory] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(
         () => {
@@ -48,7 +48,9 @@ function MangaForm() {
                     showConfirmButton: true,
                     confirmButtonText: 'Go to homepage',
                     allowOutsideClick: false,
-                })
+                }).then(() => {
+                    navigate('/');
+            });
             }).catch(err => {
                 const joi = err.response.data.message
                 console.log(err.response.data.message)
@@ -57,26 +59,13 @@ function MangaForm() {
     }
     return (
         <div>
-            <Nav />
             <div className="w-full h-screen flex flex-col bg-black items-center justify-center">
                 <div className="flex flex-col items-center justify-between p-6 w-full h-[25rem]">
                     <h1 className="text-white font-montserrat text-[1.6rem] font-light">New Manga</h1>
                     <form onSubmit={(e) => handleForm(e)} className="flex flex-col items-center w-[13rem] h-[18rem] justify-around">
                         <div className='flex-col flex w-full gap-5'>
                             <input className="text-white text-[2px] px-[3px] outline-none bg-transparent border-b-[1px] placeholder:font-montserrat placeholder:text-white" ref={title} type="text" name="insert" placeholder="Insert title" id="insertTitle" />
-                            <select
-                                ref={cat}
-                                name="select"
-                                className="text-white border-b-[1px] outline-none bg-transparent text-[2px] font-montserrat"
-                                id=""
-                            >
-                                <option className='text-black' disabled value="">Insert category</option>
-                                {category.map((cat) => (
-                                    <option className='text-black' id={cat._id} value={cat._id} key={cat._id}>
-                                        {cat.name}
-                                    </option>
-                                ))}
-                            </select>
+                                <SelectCategories category={category} cat={cat}/>
                             <input className="text-white text-[2px] px-[3px] outline-none bg-transparent border-b-[1px] placeholder:font-montserrat placeholder:text-white" ref={description} type="text" name="insert" placeholder="insert description" id="insertDescription" />
                         </div>
                         <input className="bg-white w-full h-10 rounded-[4px] font-montserrat font-extrabold" type="submit" value="Send" />

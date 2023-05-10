@@ -6,41 +6,40 @@ import apiUrl from '../../api';
 //import BrowserMangas from "../components/BrowserMangas.jsx";
 //import MangaCard from "../components/MangaCard.jsx";
 
-function Mangas() {
+function MyMangas() {
 //    let { id } = useParams()
-    const title = useRef("") 
-    const category_id = useRef("")
+    const title = useRef('')
+    const category_id = useRef('')
     const [mangas, setMangas] = useState([])
     const [categories, setCategories] = useState([])
     const [reload, setReload] = useState(false)
-    const [idArr, setId] = useState([])
-
-    function setCats(ids){
-        if( !idArr.includes(ids) ){
-            setId([...idArr,ids])
-        } else {
-            setId(idArr.filter((e)=>e!=ids))
-        }
-        setReload(!reload)
-    }
 
     useEffect(
         () => {
             let token = localStorage.getItem('token')
-            axios.get(apiUrl + `mangas?title=${title.current.value}&category_id=${idArr.join(',')}&order=1`, { headers: { Authorization: `Bearer ${token}` } })
+
+            axios.get(apiUrl + `mangas?title=${title.current.value}&category_id=&author_id=`, { headers: { Authorization: `Bearer ${token}` } })
                 .then(res => setMangas(res.data.response))
                 .catch(err => console.log(err))
         },
         [reload]
     )
     useEffect(
-        () => { 
+        () => {
+            let categorieS = Object.values(category_id.current)
+            let values = [] 
+/*            categorieS.forEach(each => {
+                 if (each.) {
+                    values.push(each.value)
+                }
+            })  */  
             axios.get(apiUrl + 'categories')
                 .then(res => setCategories(res.data.categories))
                 .catch(err => console.log(err))
         },
         []
     )
+    console.log()
    
     return (
         <>
@@ -50,8 +49,8 @@ function Mangas() {
                         <h3 className="md:text-xl">Categories</h3>
                         <div className="h-[14rem] text-sm flex-col flex gap-3">
                             {categories ? categories.map((eachCategory, index) => (                                
-                                <button className={`border rounded-[4px] ${idArr.includes(eachCategory._id)?'text-white':'text-[#9d9d9d]'}`} ref={category_id} data-valor={eachCategory._id} key={index} id={eachCategory._id} onClick={() => setCats(eachCategory._id) }>
-                                    {eachCategory.name} 
+                                <button className="border rounded-[4px]" ref={category_id} key={index} id={eachCategory.category_id} onClick={() => setReload(!reload)}>
+                                    {eachCategory.name}
                                 </button>
                             )) : null}
                         </div>
@@ -59,7 +58,7 @@ function Mangas() {
                 </div>
                 <div className="w-[80%] mt-4">
 
-                    <h1 className="text-xl font-bold">Search your next manga</h1>
+                    <h1 className="text-xl font-bold">My mangas </h1>
 
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="white" className="w-7 h-7 ml-1">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
@@ -82,4 +81,4 @@ function Mangas() {
     )
 }
 
-export default Mangas
+export default MyMangas
