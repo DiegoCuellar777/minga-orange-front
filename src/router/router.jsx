@@ -8,6 +8,7 @@ import AuthorForm from "../pages/AuthorForm.jsx";
 import MangaForm from "../pages/MangaForm.jsx";
 import EditChapter from "../pages/EditChapter.jsx";
 import ErrorPage from "../pages/ErrorPage.jsx";
+import Page from "../components/Page.jsx"
 
 let token = localStorage.getItem("token");
 let role = JSON.parse(localStorage.getItem("user"))?.role;
@@ -24,6 +25,7 @@ const routes = createBrowserRouter([
             { path: "/LogIn", element: <LogIn /> },
             { path: "/author-form", element: role === 0 ? <AuthorForm /> : <Navigate to="/" /> },
             { path: "/chapter-form", element: <EditChapter /> },
+            { path: "/chapters/:id/:page", element: <Page /> }
         ],
     },{path: "/manga-form", element: role >= 1 && token ? <MangaForm/> : <ErrorPage/>},
     {
