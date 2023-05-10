@@ -8,9 +8,12 @@ import AuthorForm from "../pages/AuthorForm.jsx";
 import MangaForm from "../pages/MangaForm.jsx";
 import EditChapter from "../pages/EditChapter.jsx";
 import ErrorPage from "../pages/ErrorPage.jsx";
+import MangaDetails from "../pages/MangaDetails.jsx";
+import Chapters from "../pages/Chapters.jsx";
 import Mangas from "../pages/Mangas.jsx"
 import MyMangas from "../pages/MyMangas.jsx";
 import Author from "../pages/Author.jsx";
+
 
 let token = localStorage.getItem("token");
 let role = JSON.parse(localStorage.getItem("user"))?.role;
@@ -30,6 +33,8 @@ const routes = createBrowserRouter([
             { path: "/author-form", element: role === 0 ? <AuthorForm /> : <Navigate to="/" /> },
             { path: "/manga-form", element: role >= 1 && token ? <MangaForm/> : <Navigate to="/" /> },
             { path: "/chapter-form", element: <EditChapter /> },
+            { path: "/mangas/:id", element: <MangaDetails /> },
+            { path: "/chapters/get", element: <Chapters /> },
             { path: "/authors/:id", element: <Author /> },
         ],
     },
