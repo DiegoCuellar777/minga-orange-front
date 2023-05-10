@@ -1,10 +1,12 @@
-/* import { configureStore } from "@reduxjs/toolkit";
-import inputs_reducer from 
+import { configureStore } from "@reduxjs/toolkit";
+import save_author from "../redux/reducers/save_author"
 
-const store = configureStore ({
+const store = configureStore({
     reducer: {
-        inputs:   
+        save_author: save_author
+
     }
 })
 
-export default store */
+export default store;
+
