@@ -12,3 +12,6 @@ ReactDOM.createRoot(document.getElementById("root"))
             <RouterProvider router={routes} />
         </Provider>
     );
+//el enrutador tiene que ser hijo del almacenamiento de estado globales
+//para que cada interfaz del enrutador pueda acceder a los estados globales
+

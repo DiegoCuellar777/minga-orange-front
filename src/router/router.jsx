@@ -8,6 +8,8 @@ import AuthorForm from "../pages/AuthorForm.jsx";
 import MangaForm from "../pages/MangaForm.jsx";
 import EditChapter from "../pages/EditChapter.jsx";
 import ErrorPage from "../pages/ErrorPage.jsx";
+import Mangas from "../pages/Mangas.jsx"
+import MyMangas from "../pages/MyMangas.jsx";
 import Author from "../pages/Author.jsx";
 
 let token = localStorage.getItem("token");
@@ -20,14 +22,17 @@ const routes = createBrowserRouter([
         errorElement: <ErrorPage />,
         children: [
             { path: "/", element: <Index /> },
+            { path: "/mangas/:page", element: <Mangas /> },
+            { path: "/yours-mangas", element: <MyMangas /> },
             { path: "/auth", element: <AuthForm /> },
             { path: "/register", element: <Register /> },
             { path: "/LogIn", element: <LogIn /> },
             { path: "/author-form", element: role === 0 ? <AuthorForm /> : <Navigate to="/" /> },
+            { path: "/manga-form", element: role >= 1 && token ? <MangaForm/> : <Navigate to="/" /> },
             { path: "/chapter-form", element: <EditChapter /> },
             { path: "/authors/:id", element: <Author /> },
         ],
-    }, { path: "/manga-form", element: role >= 1 && token ? <MangaForm /> : <ErrorPage /> },
+    },
     {
         path: "*", // cualquier ruta desconocida
         element: <ErrorPage />, // redirigir a la página de inicio
