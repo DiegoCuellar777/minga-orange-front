@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import mangas from './redurcers/mangas'
+import mangas from './reducers/mangas'
 import save_author from "../redux/reducers/save_author"
 
 const store = configureStore({
