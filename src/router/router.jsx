@@ -9,6 +9,11 @@ import MangaForm from "../pages/MangaForm.jsx";
 import EditChapter from "../pages/EditChapter.jsx";
 import ErrorPage from "../pages/ErrorPage.jsx";
 import Page from "../components/Page.jsx"
+import MangaDetails from "../pages/MangaDetails.jsx";
+import Chapters from "../pages/Chapters.jsx";
+import Mangas from "../pages/Mangas.jsx"
+import MyMangas from "../pages/MyMangas.jsx";
+import Author from "../pages/Author.jsx";
 
 let token = localStorage.getItem("token");
 let role = JSON.parse(localStorage.getItem("user"))?.role;
@@ -20,17 +25,24 @@ const routes = createBrowserRouter([
         errorElement: <ErrorPage />,
         children: [
             { path: "/", element: <Index /> },
-            {path:"/auth", element:<AuthForm/> },
+            { path: "/mangas/:page", element: <Mangas /> },
+            { path: "/yours-mangas", element: <MyMangas /> },
+            { path: "/auth", element: <AuthForm /> },
             { path: "/register", element: <Register /> },
             { path: "/LogIn", element: <LogIn /> },
             { path: "/author-form", element: role === 0 ? <AuthorForm /> : <Navigate to="/" /> },
+            { path: "/manga-form", element: role >= 1 && token ? <MangaForm/> : <Navigate to="/" /> },
             { path: "/chapter-form", element: <EditChapter /> },
-            { path: "/chapters/:id/:page", element: <Page /> }
+            { path: "/chapters/:id/:page", element: <Page /> },
+            { path: "/mangas/:id", element: <MangaDetails /> },
+            { path: "/chapters/get", element: <Chapters /> },
+            { path: "/authors/:id", element: <Author /> },
+
         ],
-    },{path: "/manga-form", element: role >= 1 && token ? <MangaForm/> : <ErrorPage/>},
+    },
     {
         path: "*", // cualquier ruta desconocida
-        element: <Navigate to="/" />, // redirigir a la página de inicio
+        element: <ErrorPage />, // redirigir a la pÃ¡gina de inicio
     },
 ]);
 
