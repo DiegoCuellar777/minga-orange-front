@@ -36,8 +36,7 @@ const routes = createBrowserRouter([
             { path: "/chapters/:id/:page", element: <Page /> },
             { path: "/manga/:id", element: <MangaDetails /> },
             { path: "/manga/:id/:page", element: <Chapters /> },
-            { path: "/authors/:id", element: token ? <Author /> : <ErrorPage /> },
-
+            { path: "/authors/:id", element: token ? <Author /> : <ErrorPage /> }
         ],
     },
     {
