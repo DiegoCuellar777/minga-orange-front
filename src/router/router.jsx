@@ -31,12 +31,12 @@ const routes = createBrowserRouter([
             { path: "/register", element: <Register /> },
             { path: "/LogIn", element: <LogIn /> },
             { path: "/author-form", element: role === 0 ? <AuthorForm /> : <Navigate to="/" /> },
-            { path: "/manga-form", element: role >= 1 && token ? <MangaForm/> : <Navigate to="/" /> },
+            { path: "/manga-form", element: role >= 1 && token ? <MangaForm /> : <Navigate to="/" /> },
             { path: "/chapter-form", element: <EditChapter /> },
-            { path: "/chapters/:id/:page", element: <Page /> }
+            { path: "/chapters/:id/:page", element: <Page /> },
             { path: "/mangas/:id", element: <MangaDetails /> },
             { path: "/chapters/get", element: <Chapters /> },
-            { path: "/authors/:id", element: <Author /> },
+            { path: "/authors/:id", element: token ? <Author /> : <ErrorPage /> },
 
         ],
     },

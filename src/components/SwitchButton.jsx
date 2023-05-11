@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function SwitchButton({ setIsOn, id, dispatch, saveMangas, switchOn }) {
+export default function SwitchButton({ setIsOn, id, dispatch, saveMangas, switchOn, headers, apiUrl }) {
     const [mangas, setMangas] = useState([]);
     useEffect(() => {
         axios
-            .get(`http://localhost:8000/mangas/${id}`)
+            .get(`${apiUrl}mangas/authors/${id}`, headers)
             .then((response) => {
                 setMangas(response.data.response);
                 /* console.log(response.data.response); */
@@ -15,7 +15,7 @@ export default function SwitchButton({ setIsOn, id, dispatch, saveMangas, switch
             });
     }, [id]);
 
-    if (mangas.length < 4) {
+    if (mangas.length <= 4) {
         return null;
     }
 
