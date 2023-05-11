@@ -5,10 +5,10 @@ import mangaCards from '../actions/mangasCards'
 const { pageMangasCards } = mangaCards
 
 let initialState = {
-    page: '',
-    category_id: '',
-    title: '',
     id: '',
+    title: '',
+    category_id: '',
+    page: '',
 }
 
 const reducer = createReducer( 
@@ -22,7 +22,7 @@ const reducer = createReducer(
                     title: action.payload.title,
                     category_id: action.payload.category_id,
                     page: action.payload.page,
-                }
+                } 
                 return new_state
             }
         )

@@ -4,11 +4,25 @@ import apiUrl from '../../api';
 import axios from 'axios';
 import Swal from 'sweetalert2'
 import SelectCategories from '../components/SelectCategories.jsx';
+import { useSelector, useDispatch } from 'react-redux'
+import action from '../redux/actions/inputs_mangaForm';
+
+const { createMangaForm } = action
 
 function MangaForm() {
-    //    let { id } = useParams()
+
+    const dispatch = useDispatch()
     const [category, setCategory] = useState([]);
     const navigate = useNavigate();
+
+    function saveData() {
+        let data = {
+            title: title.current.value,
+            category_id: cat.current.value,
+            description: description.current.value
+        }
+        dispatch(createMangaForm(data))
+    }
 
     useEffect(
         () => {
@@ -26,7 +40,7 @@ function MangaForm() {
                 console.log(error);
             })
     }
-    console.log(category)
+    
     let title = useRef(null)
     let cat = useRef(null)
     let description = useRef(null)
@@ -38,7 +52,7 @@ function MangaForm() {
             category_id: cat.current.value,
             description: description.current.value
         }
-        console.log(data)
+        //console.log(data)
         axios.post(apiUrl + 'mangas', data)
             .then((res) => {
                 console.log(res.data)
@@ -64,9 +78,9 @@ function MangaForm() {
                     <h1 className="text-white font-montserrat text-[1.6rem] font-light">New Manga</h1>
                     <form onSubmit={(e) => handleForm(e)} className="flex flex-col items-center w-[13rem] h-[18rem] justify-around">
                         <div className='flex-col flex w-full gap-5'>
-                            <input className="text-white text-[2px] px-[3px] outline-none bg-transparent border-b-[1px] placeholder:font-montserrat placeholder:text-white" ref={title} type="text" name="insert" placeholder="Insert title" id="insertTitle" />
-                                <SelectCategories category={category} cat={cat}/>
-                            <input className="text-white text-[2px] px-[3px] outline-none bg-transparent border-b-[1px] placeholder:font-montserrat placeholder:text-white" ref={description} type="text" name="insert" placeholder="insert description" id="insertDescription" />
+                            <input onKeyUp={saveData} className="text-white text-[2px] px-[3px] outline-none bg-transparent border-b-[1px] placeholder:font-montserrat placeholder:text-white" ref={title} type="text" name="insert" placeholder="Insert title" id="insertTitle" />
+                                <SelectCategories onChange={saveData} category={category} cat={cat}/>
+                            <input onKeyUp={saveData} className="text-white text-[2px] px-[3px] outline-none bg-transparent border-b-[1px] placeholder:font-montserrat placeholder:text-white" ref={description} type="text" name="insert" placeholder="insert description" id="insertDescription" />
                         </div>
                         <input className="bg-white w-full h-10 rounded-[4px] font-montserrat font-extrabold" type="submit" value="Send" />
                     </form>
