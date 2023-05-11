@@ -6,7 +6,7 @@ const { inputs_filter } = inputs_actions
 //defino estado inicial
 let initial_state = {
     title: '',
-    categories: []
+    categories: [],
 }
 
 const reducer = createReducer(
@@ -18,7 +18,9 @@ const reducer = createReducer(
                 const new_state = {
                     ...state,
                     title: action.payload.title,
-                    categories: action.payload.categories
+                    categories: action.payload.categories,
+                    page: action.payload.page,
+                    category_id: action.payload.category_id
                 }
                 return new_state
             }
