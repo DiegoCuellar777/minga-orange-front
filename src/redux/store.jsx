@@ -8,7 +8,7 @@ const store = configureStore({
     reducer: {
         save_author: save_author,
         inputManga: mangas,
-        dataChapter: chapterData
+        dataChapter: chapterData,
         pageMangas: mangaCards
     }
 })
