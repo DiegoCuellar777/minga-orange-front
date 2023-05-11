@@ -44,7 +44,7 @@ export default function Page() {
         if (currentChapter && currentChapter.pages.length > 0) {
           const mangaId = currentChapter.manga_id;
           console.log(mangaId)
-          navigate(`/mangas/${mangaId}`);
+          navigate(`/manga/${mangaId}`);
           return;
         }
       }
@@ -68,7 +68,7 @@ export default function Page() {
     }))
   }
 
-  console.log(chapters)
+  console.log(currentChapter)
 
   return (
     <div style={{ position: 'relative' }}>
@@ -80,15 +80,20 @@ export default function Page() {
           </h1>
         )}
       </div>
-      <div className="w-screen h-screen bg-[url('/images/Ellipse.png')] bg-cover flex justify-center p-[5%]">
+      <div className="w-screen h-screen bg-[url('/images/Ellipse.png')] bg-cover flex flex-col items-center p-[5%]">
         {chapters.length > 0 && currentChapter >= 0 && currentPage < chapters[currentChapter].pages.length && (
           <img
             onClick={handleClick}
             src={chapters[currentChapter].pages[currentPage]}
-            className=""
+            className="h-[90%]"
             alt=""
           />
         )}
+      <div className='w-screen flex justify-end mr-[20%]'>
+        {chapters.length > 0 && currentChapter >= 0 && currentPage < chapters[currentChapter].pages.length && (
+          <h2 className='text-white '> {currentPage+1}/{chapters[currentChapter].pages.length} </h2>
+        )}
+      </div>
       </div>
     </div>
   );
