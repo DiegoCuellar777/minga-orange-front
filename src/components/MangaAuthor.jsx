@@ -2,13 +2,16 @@ import React from 'react'
 import { Link as Anchor } from "react-router-dom";
 
 export default function MangaAuthor({ mangas }) {
+    /* mangas.map((manga) => (
+        console.log(manga._id)
+    )) */
     return (
         <div className='grid grid-cols-2 sm:grid-cols-4 gap-2 mt-2'>
             {mangas.map((manga) => (
                 <div className='flex flex-col items-center' key={manga.title}>
-                    <Anchor to={`/mangas/${manga.author_id}`}>
+                    <Anchor to={`/manga/${manga._id}`}>
                         <img
-                            className="rounded-xl h-40 w-[8rem] sm:h-[15rem] sm:w-[9rem]"
+                            className="rounded-xl h-40 w-[8rem] sm:h-[15rem] sm:w-[9rem] object-cover"
                             src={manga.cover_photo}
                             alt={manga.title} />
                     </Anchor>
