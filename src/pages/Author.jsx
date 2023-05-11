@@ -1,24 +1,35 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import save_author from "../redux/actions/save_author";
 import moment from "moment";
 import axios from "axios";
 import SwitchButton from "../components/SwitchButton"
+import MangaAuthor from "../components/MangaAuthor";
+import apiUrl from "../../api";
+import ErrorPage from "../pages/ErrorPage";
 
 const { saveAuthorData } = save_author
 const { saveMangas } = save_author
 
 export default function Author() {
-    const store = useSelector(store => console.log(store.save_author))
-    const switchOn = useSelector(state => state.save_author.switchOn)
-    console.log(switchOn)
     const dispatch = useDispatch()
+    const store = useSelector(store => console.log(store.save_author))
+    const {
+        author_photo,
+        author_name,
+        author_last_name,
+        author_city,
+        author_country,
+        author_date,
+        switchOn } = useSelector((state) => state.save_author);
+    console.log(switchOn)
     /* console.log(saveAuthorData) */
     const { id } = useParams();
     const [author, setAuthor] = useState([]);
     const [mangas, setMangas] = useState([]);
     const [isOn, setIsOn] = useState(false);
+    const [error, setError] = useState(false);
 
     function handleSaveAuthor(authorData) {
         dispatch(saveAuthorData({
@@ -31,42 +42,34 @@ export default function Author() {
         }));
     }
 
+    let token = localStorage.getItem("token")
+    let headers = { headers: { "Authorization": `Bearer ${token}` } }
+
     useEffect(() => {
-        axios.get(`http://localhost:8000/api/authors/${id}`)
-            .then(response => {
-                setAuthor(response.data.response);
-                handleSaveAuthor(response.data.response);
-                /* console.log(response.data.response); */
+        Promise.all([
+            axios.get(`${apiUrl}api/authors/${id}`, headers),
+            axios.get(`${apiUrl}mangas/authors/${id}?new=${isOn}`, headers),
+        ])
+            .then((responses) => {
+                const authorResponse = responses[0].data.response;
+                const mangasResponse = responses[1].data.response;
+                setAuthor(authorResponse);
+                handleSaveAuthor(authorResponse);
+                setMangas(mangasResponse);
             })
-            .catch(error => {
+            .catch((error) => {
                 console.error(error);
-            });
-    }, [id]);
-    useEffect(() => {
-        axios
-            .get(`http://localhost:8000/mangas/${id}?new=${isOn}`)
-            .then((response) => {
-                setMangas(response.data.response);
-                /* console.log(response.data.response); */
-            })
-            .catch(error => {
-                console.error(error);
+                setError(true);
             });
     }, [id, isOn]);
 
-    const author_photo = useSelector(state => state.save_author.author_photo);
-    const author_name = useSelector(state => state.save_author.author_name);
-    const author_last_name = useSelector(state => state.save_author.author_last_name);
-    const author_city = useSelector(state => state.save_author.author_city);
-    const author_country = useSelector(state => state.save_author.author_country);
-    const author_date = useSelector(state => state.save_author.author_date);
-
-    const mangas_photo = mangas.map(manga => manga.cover_photo);
-    const mangas_title = mangas.map(manga => manga.title);
+    if (error) {
+        return <ErrorPage />;
+    }
 
     return (
-        <div className="min-h-screen w-full text-white flex flex-col justify-center items-center pt-8">
-            <div className="flex border-b-2 border-white pb-4">
+        <div className="min-h-[90vh] w-full text-white flex flex-col justify-center items-center">
+            <div className="flex border-b-2 border-white pb-2">
                 <img
                     className="rounded-full object-cover object-center h-16 w-16 mr-4"
                     src={author_photo}
@@ -89,15 +92,8 @@ export default function Author() {
                     </p>
                 </div>
             </div>
-            <SwitchButton {...{ isOn, setIsOn, id, saveMangas, dispatch, switchOn }} />
-            <div className="w-screen p-1 h-[60%] flex flex-wrap justify-center sm:w-[80%] md:w-[50%]">
-                {mangas.map((manga) => (
-                    <div className=" w-[45vw] h-[32vh] flex flex-col p-1 m-1 sm:w-[40%] md:w-[35%] md:m-2" key={manga.title}>
-                        <img src={manga.cover_photo} alt={manga.title} className="w-[95%] h-[80%] sm:w-[80%] sm:min-h-[30vh] rounded-xl" />
-                        <p className="text-[15px] ">{manga.title}</p>
-                    </div>
-                ))}
-            </div>
+            <SwitchButton {...{ isOn, setIsOn, id, saveMangas, dispatch, switchOn, headers, apiUrl }} />
+            <MangaAuthor {...{ mangas }} />
         </div>
     );
 }
