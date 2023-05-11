@@ -11,9 +11,10 @@ export default function MangaAuthor({ mangas }) {
                 <div className='flex flex-col items-center' key={manga.title}>
                     <Anchor to={`/manga/${manga._id}`}>
                         <img
-                            className="rounded-xl h-40 w-[8rem] sm:h-[15rem] sm:w-[9rem] object-cover"
+                            className="rounded-xl h-40 w-[8rem] sm:h-[15rem] sm:w-[9rem] object-cover hover:shadow-lg hover:opacity-50 cursor-pointer"
                             src={manga.cover_photo}
-                            alt={manga.title} />
+                            alt={manga.title}
+                        />
                     </Anchor>
                     <div >
                         <p className="my-2 text-white font-montserrat font-normal text-lg leading-5 w-[8rem]">
@@ -24,7 +25,7 @@ export default function MangaAuthor({ mangas }) {
             ))}
             {mangas.length < 4 && Array.from({ length: 4 - mangas.length }).map((_, index) => (
                 <div className='flex flex-col items-center' key={index}>
-                    <div className='rounded-xl h-40 w-[8rem] bg-gray-500 sm:h-[15rem] sm:w-[9rem]' />
+                    <div className='rounded-xl h-40 w-[8rem] bg-gray-500 sm:h-[15rem] sm:w-[9rem] hover:opacity-50 cursor-pointer' />
                     <div >
                         <p className="my-2 text-white font-montserrat font-normal text-lg leading-5 w-[8rem]">
                             Coming soon
