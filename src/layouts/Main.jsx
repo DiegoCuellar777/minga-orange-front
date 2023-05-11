@@ -7,8 +7,8 @@ import { Outlet } from 'react-router-dom';
 export default function Main() {
     const location = useLocation();
     const viewFooter = location.pathname === '/manga-form' || location.pathname === '/chapter-form' || location.pathname === '/author-form'
-    const { id } = useParams();
-    const viewNav = location.pathname === '/' || location.pathname === '/author-form' || location.pathname === "/manga-form" || location.pathname === '/chapter-form' || location.pathname === '/LogIn' || location.pathname === `/authors/${id}` || location.pathname === '/mangas/:page' || location.pathname === '/manga/:id/:page' || location.pathname === '/manga/:id';
+    const { id, page } = useParams();
+    const viewNav = location.pathname === '/' || location.pathname === '/author-form' || location.pathname === "/manga-form" || location.pathname === '/chapter-form' || location.pathname === '/LogIn' || location.pathname === `/authors/${id}` || location.pathname === `/mangas/${page}` || location.pathname === '/manga/:id/:page' || location.pathname === '/manga/:id';
 
     return (
         <div className="min-h-screen bg-black">

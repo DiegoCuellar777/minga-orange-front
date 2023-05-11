@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link as Anchor, useNavigate} from "react-router-dom"
+import { Link as Anchor, useNavigate, useParams } from "react-router-dom"
 import Logo from "../assets/images/Logo.png";
 import apiUrl from "../../api";
 import axios from "axios";
@@ -9,6 +9,7 @@ export default function Nav() {
     const [isOffcanvasOpen, setIsOffcanvasOpen] = useState(false);
     
     const navigate = useNavigate()
+    const { page } = useParams()
     
     const handleMenuClick = () => {
         setIsOffcanvasOpen(!isOffcanvasOpen);
@@ -77,7 +78,7 @@ export default function Nav() {
                             {!token && <Anchor to={'/LogIn'} className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]" onClick={handleCloseOffcanvas}>Log In</Anchor>}
                             {!token && <Anchor to={'/register'} className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]">Register</Anchor>}
                             {token && <Anchor to={'/'} className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]">Home</Anchor>}
-                            {token && <Anchor to={'/mangas/:page'} className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]">Mangas</Anchor>}
+                            {token && <Anchor to={`/mangas/${page}`} className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]">Mangas</Anchor>}
                             {token && <Anchor to={'/yours-mangas'} className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]">My Mangas</Anchor>}
                             {(role===1 || role === 2) && token && <Anchor to={'/manga-form'} className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]">New Manga</Anchor>}
                             {token && <Anchor className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]">Favourites</Anchor>}
