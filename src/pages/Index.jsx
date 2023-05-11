@@ -14,9 +14,8 @@ export default function Index() {
         <main id="Home">
             {<Presentation />}
             <div className="min-h-[100vh] relative md:w-full md:flex md:items-center md:justify-around">
-                {/* <Carousel/>
-                <Welcome/> */}
-                <MangaDetails/>
+                <Carousel/>
+                <Welcome/>
             </div>
         </main>
     )
