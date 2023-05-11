@@ -1,9 +1,17 @@
+import Nav from './Nav';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import apiUrl from '../../api';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import chapterDataAction from "../../src/redux/actions/chapterData"  // Es un objeto con todas las acciones que se configuraron 
+
+const {chapterData} = chapterDataAction
 
 export default function Page() {
+  const store =useSelector(store=> console.log(store.dataChapter))
+  const dispatch = useDispatch()
+
   const { id, page } = useParams();
   const [chapters, setChapters] = useState([]);
   const [currentPage, setPage] = useState(parseInt(page));
@@ -14,7 +22,9 @@ export default function Page() {
     let token = localStorage.getItem('token');
     let headers = { headers: { Authorization: `Bearer ${token}` } };
     axios(apiUrl + `chapters/${id}`)
-      .then((res) => setChapters(res.data.chapters))
+      .then((res) => {
+        setChapters(res.data.chapters)
+      })
       .catch((err) => console.log(err));
   }, [id]);
 
@@ -29,27 +39,48 @@ export default function Page() {
     if (clientX < (left + right) / 2) {
       if (currentPage > 0) {
         setPage(currentPage - 1);
+      } else {
+        const currentChapter = chapters.find((chapter) => chapter._id === id);
+        if (currentChapter && currentChapter.pages.length > 0) {
+          const mangaId = currentChapter.manga_id;
+          console.log(mangaId)
+          navigate(`/mangas/${mangaId}`);
+          return;
+        }
       }
     } else {
       if (currentPage === chapters[currentChapter].pages.length - 1) {
         const nextChapterIndex = currentChapter + 1;
         if (nextChapterIndex < chapters.length) {
           const nextChapterId = chapters[nextChapterIndex]._id;
-          setPage(0); // Establecer la página en 0
+          setPage(0);
           navigate(`/chapters/${nextChapterId}/0`);
-          return; // Salir de la función para evitar la actualización adicional de currentPage
+          return;
         }
       }
       setPage(currentPage + 1);
     }
+    dispatch(chapterData({
+      title: chapters[currentChapter].title,
+      pageRef: currentPage+1,
+      _id: chapters[currentChapter]._id,
+      manga_id: chapters[currentChapter].manga_id
+    }))
   }
 
-  console.log(chapters);
+  console.log(chapters)
 
   return (
-    <div>
-      <h1>hola</h1>
-      <div className="w-screen h-screen bg-[url('/images/Ellipse.png')] bg-cover flex justify-center">
+    <div style={{ position: 'relative' }}>
+      <Nav />
+      <div style={{ position: 'absolute', top: '4%', left: '50%', transform: 'translate(-50%, -50%)' }}>
+        {chapters.length > 0 && currentChapter >= 0 && currentPage < chapters[currentChapter].pages.length && (
+          <h1 className='text-white'>
+            Chapter #{currentChapter + 1} - {chapters[currentChapter].title}
+          </h1>
+        )}
+      </div>
+      <div className="w-screen h-screen bg-[url('/images/Ellipse.png')] bg-cover flex justify-center p-[5%]">
         {chapters.length > 0 && currentChapter >= 0 && currentPage < chapters[currentChapter].pages.length && (
           <img
             onClick={handleClick}
