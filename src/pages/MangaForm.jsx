@@ -11,6 +11,7 @@ const { createMangaForm } = action
 
 function MangaForm() {
 
+    const store = useSelector(store => console.log(store.mangaForn))
     const dispatch = useDispatch()
     const [category, setCategory] = useState([]);
     const navigate = useNavigate();

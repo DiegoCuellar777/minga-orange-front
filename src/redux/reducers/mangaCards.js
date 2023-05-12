@@ -5,9 +5,9 @@ import mangaCards from '../actions/mangasCards'
 const { pageMangasCards } = mangaCards
 
 let initialState = {
-    id: '',
+//    id: '',
+//    category_id: '',
     title: '',
-    category_id: '',
     page: '',
 }
 
@@ -18,9 +18,9 @@ const reducer = createReducer(
             (state, action) => {
                 const new_state = {
                     ...state,
-                    id: action.payload.id,
+                    //id: action.payload.id,
+                    //category_id: action.payload.category_id,
                     title: action.payload.title,
-                    category_id: action.payload.category_id,
                     page: action.payload.page,
                 } 
                 return new_state
