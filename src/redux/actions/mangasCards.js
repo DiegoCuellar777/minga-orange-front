@@ -4,6 +4,7 @@ const pageMangasCards = createAction('pageMangasCards',(data) => {
         return {
             payload: {
                 title: data.title,
+                page: data.page
             }
         }
     }

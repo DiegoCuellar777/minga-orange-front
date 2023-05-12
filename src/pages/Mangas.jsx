@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react"
-import { Link as Anchor } from "react-router-dom"
+import { Link as Anchor, useParams, useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from 'react-redux'
-import { useParams, useNavigate } from "react-router-dom"
 import actions from '../redux/actions/mangasCards'
 import axios from "axios"
 import apiUrl from '../../api';
@@ -12,6 +11,8 @@ const { pageMangasCards } = actions
 
 function Mangas() {
 
+    const store = useSelector(store => console.log(store.pageMangas))
+    const params = useParams()
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const title = useRef("")
@@ -21,28 +22,33 @@ function Mangas() {
     const [reload, setReload] = useState(false)
     const [idArr, setId] = useState([])
     const [currentPage, setCurrentPage] = useState(1)
-
-
-    useSelector((store)=> console.log(store))
+    
     function captureText() {
         setReload(!reload)
         dispatch(pageMangasCards({
             title: title.current.value,
-/*             id: ,
-            category_id: ,
-            page: , */
+            page: currentPage, 
+            /*             id: ,
+            category_id: ,*/
         }))
     }
-
+    console.log(title.current.value)
+    
     const prevPage = () => {
-        setCurrentPage(currentPage - 1);
-        navigate(`/mangas/${currentPage}`)
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1);
+            navigate(`/mangas/${currentPage - 1}`)
+        }
+        captureText()
     }
     const nextPage = () => {
-        setCurrentPage(currentPage + 1);
-        navigate(`/mangas/${currentPage}`)
+        if (currentPage > 0) {
+            setCurrentPage(currentPage + 1);
+            navigate(`/mangas/${currentPage + 1}`)
+        }
+        captureText()
     }
-
+    
     function setCats(ids) {
         if (!idArr.includes(ids)) {
             setId([...idArr, ids])
@@ -51,7 +57,7 @@ function Mangas() {
         }
         setReload(!reload)
     }
-
+    
     useEffect(
         () => {
             let token = localStorage.getItem('token')
@@ -92,7 +98,7 @@ function Mangas() {
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="white" className="w-7 h-7 ml-1">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                         </svg>
-                        <input className='md:text-[17px] text-center text-[#ffffffea] bg-transparent placeholder:text-white placeholder:text-sm outline-none text-white lg:text-[18px]' type="text" placeholder="Search" name="title" id="title" ref={title} onKeyUp={() => captureText} />
+                        <input className='md:text-[17px] text-center text-[#ffffffea] bg-transparent placeholder:text-white placeholder:text-sm outline-none text-white lg:text-[18px]' type="text" placeholder="Search" name="title" id="title" ref={title} onKeyUp={() => captureText()} />
                     </div>
                     <div className="flex flex-wrap gap- md:gap-7 w-full min-h-[22rem]">
                         {mangas ? mangas.map((eachManga, index) => (
@@ -110,7 +116,7 @@ function Mangas() {
                 {currentPage > 1 ? (
                     <button onClick={prevPage} className="bg-white w-[8rem] h-[3rem] flex items-center justify-center rounded-md font-bold text-black"><span>Previous page <AiOutlineArrowLeft /></span></button>
                 ) : <button className="text-black opacity-50 w-[8rem] h-[3rem] flex items-center justify-center rounded-md font-bold bg-[#9d9d9d]" disabled><span>Previous page <AiOutlineArrowLeft /></span></button>}
-                {mangas && mangas.length >= 4 ? (
+                {mangas && mangas.length >= 6 ? (
                     <button onClick={nextPage} className="bg-white w-[8rem] h-[3rem] flex items-center justify-center rounded-md font-bold text-black"><span>Next page <AiOutlineArrowRight /></span></button>
                 ) : <button className="text-black opacity-50 w-[8rem] h-[3rem] flex items-center justify-center rounded-md font-bold bg-[#9d9d9d]" disabled><span>Next page <AiOutlineArrowRight /></span></button>}
             </div>
