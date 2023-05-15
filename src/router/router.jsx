@@ -4,7 +4,9 @@ import Register from "../pages/Register.jsx";
 import LogIn from "../pages/LogIn.jsx";
 import Index from "../pages/Index.jsx";
 import AuthForm from "../pages/AuthForm.jsx";
+import NewRole from "../pages/NewRole.jsx";
 import AuthorForm from "../pages/AuthorForm.jsx";
+import CompanyForm from "../pages/CompanyForm.jsx";
 import MangaForm from "../pages/MangaForm.jsx";
 import EditChapter from "../pages/EditChapter.jsx";
 import ErrorPage from "../pages/ErrorPage.jsx";
@@ -30,7 +32,9 @@ const routes = createBrowserRouter([
             { path: "/auth", element: <AuthForm /> },
             { path: "/register", element: <Register /> },
             { path: "/LogIn", element: <LogIn /> },
+            { path: "/new-role", element: <NewRole /> },
             { path: "/author-form", element: role === 0 ? <AuthorForm /> : <Navigate to="/" /> },
+            { path: "/company-form", element: role === 0 ? <CompanyForm /> : <Navigate to="/" /> },
             { path: "/manga-form", element: role >= 1 && token ? <MangaForm /> : <Navigate to="/" /> },
             { path: "/chapter-form", element: <EditChapter /> },
             { path: "/chapters/:id/:page", element: <Page /> },

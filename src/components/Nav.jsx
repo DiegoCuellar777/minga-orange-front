@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import { Link as Anchor, useNavigate, useParams } from "react-router-dom"
+import { Link as Anchor, useNavigate, useParams, useLocation } from "react-router-dom"
 import Logo from "../assets/images/Logo.png";
 import apiUrl from "../../api";
 import axios from "axios";
 
-
 export default function Nav() {
     const [isOffcanvasOpen, setIsOffcanvasOpen] = useState(false);
-    
+
     const navigate = useNavigate()
+    const location = useLocation()
     const { page } = useParams()
-    
+
     const handleMenuClick = () => {
         setIsOffcanvasOpen(!isOffcanvasOpen);
     };
@@ -21,25 +21,27 @@ export default function Nav() {
 
     let token = localStorage.getItem("token")
     let user = JSON.parse(localStorage.getItem("user"))
-    let headers = {headers:{'Authorization':`Bearer ${token}`}}
+    let headers = { headers: { 'Authorization': `Bearer ${token}` } }
 
 
     function backHome() {
-        axios.post(apiUrl+"auth/signout", null, headers)
-            .then(res=>{
+        axios.post(apiUrl + "auth/signout", null, headers)
+            .then(res => {
                 localStorage.removeItem("token")
                 localStorage.removeItem("user")
                 navigate("/")
             })
-            .catch(err=>alert(err))
+            .catch(err => alert(err))
     }
-    
+
     let role = JSON.parse(localStorage.getItem("user"))?.role
     let photo = JSON.parse(localStorage.getItem("user"))?.photo
     let email = JSON.parse(localStorage.getItem("user"))?.email
 
+
+
     return (
-        <nav className="h-[10vh] flex justify-between p-4 w-full z-10 s border-gradient-to-r from-transparent to-transparent via-white">
+        <nav className="fixed h-[10vh] flex justify-between p-4 w-full z-10 s border-gradient-to-r from-transparent to-transparent via-white">
             <button className="contents" onClick={handleMenuClick}>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -47,7 +49,7 @@ export default function Nav() {
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="currentColor"
-                    className="text-white"
+                    className={`${location.pathname === "/new-role" ? "text-black" : "text-white"}`}
                 >
                     <path
                         strokeLinecap="round"
@@ -74,13 +76,13 @@ export default function Nav() {
                     </div>
                     <div className="w-[100%] h-[100%] text-white flex-col mt-3 cel:order-3 sm:order-2 flex items-center justify-between">
 
-                        <ul className="w-[80%] flex flex-col items-center gap-2 text-center">  
+                        <ul className="w-[80%] flex flex-col items-center gap-2 text-center">
                             {!token && <Anchor to={'/LogIn'} className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]" onClick={handleCloseOffcanvas}>Log In</Anchor>}
                             {!token && <Anchor to={'/register'} className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]">Register</Anchor>}
                             {token && <Anchor to={'/'} className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]">Home</Anchor>}
                             {token && <Anchor to={`/mangas/:page`} className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]">Mangas</Anchor>}
                             {token && <Anchor to={'/yours-mangas'} className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]">My Mangas</Anchor>}
-                            {(role===1 || role === 2) && token && <Anchor to={'/manga-form'} className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]">New Manga</Anchor>}
+                            {(role === 1 || role === 2) && token && <Anchor to={'/manga-form'} className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]">New Manga</Anchor>}
                             {token && <Anchor className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]">Favourites</Anchor>}
                             {token && <Anchor className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]" onClick={backHome}>Logout</Anchor>}
                             {token && <Anchor to={'/chapter-form'} className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]">New Chapter</Anchor>}
@@ -88,8 +90,8 @@ export default function Nav() {
                         </ul>
                         <ul className="w-[80%] flex justify-center items-center gap-2 text-center">
                             {token && role === 0 &&
-                                <Anchor to="/author-form" className="p-2 mb-4 bg-white text-black rounded-md w-[70%]">
-                                    New Author
+                                <Anchor to="/new-role" className="p-2 mb-4 bg-white text-black rounded-md w-[70%]">
+                                    New role
                                 </Anchor>
                             }
                         </ul>
