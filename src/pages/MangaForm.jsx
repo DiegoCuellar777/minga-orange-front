@@ -20,6 +20,7 @@ function MangaForm() {
         let data = {
             title: title.current.value,
             category_id: cat.current.value,
+            cover_photo: urlPhoto.current.value,
             description: description.current.value
         }
         dispatch(createMangaForm(data))
@@ -41,23 +42,28 @@ function MangaForm() {
                 console.log(error);
             })
     }
-    
+
     let title = useRef(null)
     let cat = useRef(null)
+    let urlPhoto = useRef("")
     let description = useRef(null)
 
     function handleForm(e) {
         e.preventDefault()
-        let data = {
+        const user = JSON.parse(localStorage.getItem("user"));
+        const userId = user.id;
+        const token = localStorage.getItem('token')
+        const headers = { headers: { Authorization: `Bearer ${token}` } }
+        const data = {
+            author_id: userId,
             title: title.current.value,
+            cover_photo: urlPhoto.current.value,
+            description: description.current.value,
             category_id: cat.current.value,
-            description: description.current.value
         }
-        //console.log(data)
-        axios.post(apiUrl + 'mangas', data)
-            .then((res) => {
-                console.log(res.data)
-                Swal.fire({
+        axios.post(apiUrl + 'mangas', data, headers)
+            .then(res => {
+                res.Swal.fire({
                     title: 'Manga successfully created',
                     icon: 'success',
                     showConfirmButton: true,
@@ -65,7 +71,7 @@ function MangaForm() {
                     allowOutsideClick: false,
                 }).then(() => {
                     navigate('/');
-            });
+                });
             }).catch(err => {
                 const joi = err.response.data.message
                 console.log(err.response.data.message)
@@ -80,7 +86,8 @@ function MangaForm() {
                     <form onSubmit={(e) => handleForm(e)} className="flex flex-col items-center w-[13rem] h-[18rem] justify-around">
                         <div className='flex-col flex w-full gap-5'>
                             <input onKeyUp={saveData} className="text-white text-[2px] px-[3px] outline-none bg-transparent border-b-[1px] placeholder:font-montserrat placeholder:text-white" ref={title} type="text" name="insert" placeholder="Insert title" id="insertTitle" />
-                                <SelectCategories onChange={saveData} category={category} cat={cat}/>
+                            <SelectCategories onChange={saveData} category={category} cat={cat} />
+                            <input onKeyUp={saveData} className="text-white text-[2px] px-[3px] outline-none bg-transparent border-b-[1px] placeholder:font-montserrat placeholder:text-white" ref={urlPhoto} type="text" name="insert" placeholder="insert url image of manga" id="insertPhoto" />
                             <input onKeyUp={saveData} className="text-white text-[2px] px-[3px] outline-none bg-transparent border-b-[1px] placeholder:font-montserrat placeholder:text-white" ref={description} type="text" name="insert" placeholder="insert description" id="insertDescription" />
                         </div>
                         <input className="bg-white w-full h-10 rounded-[4px] font-montserrat font-extrabold" type="submit" value="Send" />
