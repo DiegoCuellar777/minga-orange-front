@@ -58,7 +58,9 @@ export default function Nav() {
                     />
                 </svg>
             </button>
-            <img className="h-[5vh]" src={Logo} alt="logo" to={'/'} />
+            <Anchor to="/" >
+                <img className="h-[5vh]" src={Logo} alt="logo" to={'/'} />
+            </Anchor>
             {isOffcanvasOpen && (
                 <div className="flex flex-col items-center w-full md:w-[20rem] h-[100%] fixed bg-gradient-to-r hover:bg-[#89977928] from-neutral-500 to-[#000000e3] order-2 top-0 left-0 text-black z-50">
                     <div className="flex justify-between w-[100%] items-center">
@@ -92,6 +94,11 @@ export default function Nav() {
                             {token && role === 0 &&
                                 <Anchor to="/new-role" className="p-2 mb-4 bg-white text-black rounded-md w-[70%]">
                                     New role
+                                </Anchor>
+                            }
+                            {token && role === 3 &&
+                                <Anchor to="/admin" className="p-2 mb-4 bg-white text-black rounded-md w-[70%]">
+                                    Panel Admin
                                 </Anchor>
                             }
                         </ul>

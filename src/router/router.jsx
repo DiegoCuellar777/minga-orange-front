@@ -16,6 +16,7 @@ import Chapters from "../pages/Chapters.jsx";
 import Mangas from "../pages/Mangas.jsx"
 import MyMangas from "../pages/MyMangas.jsx";
 import Author from "../pages/Author.jsx";
+import PanelAdmin from "../pages/PanelAdmin.jsx";
 
 let token = localStorage.getItem("token");
 let role = JSON.parse(localStorage.getItem("user"))?.role;
@@ -32,16 +33,17 @@ const routes = createBrowserRouter([
             { path: "/auth", element: <AuthForm /> },
             { path: "/register", element: <Register /> },
             { path: "/LogIn", element: <LogIn /> },
-            { path: "/new-role", element: <NewRole /> },
-            { path: "/author-form", element: role === 0 ? <AuthorForm /> : <Navigate to="/" /> },
-            { path: "/company-form", element: role === 0 ? <CompanyForm /> : <Navigate to="/" /> },
+            { path: "/new-role", element: role === 0 && token ? <NewRole /> : <Navigate to="/" /> },
+            { path: "/author-form", element: token ? <AuthorForm /> : <Navigate to="/" /> },
+            { path: "/company-form", element: token ? <CompanyForm /> : <Navigate to="/" /> },
             { path: "/manga-form", element: role >= 1 && token ? <MangaForm /> : <Navigate to="/" /> },
             { path: "/chapter-form", element: <EditChapter /> },
             { path: "/chapters/:id/:page", element: <Page /> },
             { path: "/manga/:id", element: <MangaDetails /> },
             { path: "/manga/:id/:page", element: <Chapters /> },
-            { path: "/authors/:id", element: token ? <Author /> : <ErrorPage /> }
+            { path: "/authors/:id", element: token ? <Author /> : <ErrorPage /> },
 
+            { path: "/admin", element: role === 3 && token ? <PanelAdmin /> : <Navigate to="/" /> }
         ],
     },
     {
