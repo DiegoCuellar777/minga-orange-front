@@ -2,7 +2,7 @@ import { createReducer } from "@reduxjs/toolkit";
 //Se importan las acciones
 import chapterDataAction from "../actions/chapterData"
 //Desestructuro las acciones que necesito configurar 
-const { chapterData } = chapterDataAction
+const { chapterData, get_chapters, delete_chapter } = chapterDataAction
 //Defino estado inicial 
 let initial_state = {
     title: "",
@@ -11,7 +11,11 @@ let initial_state = {
     manga_id: ""
 }
 
-const reducer = createReducer(
+let initial_state_chapters = {
+    chapters: []
+}
+
+export const reducer = createReducer(
     initial_state,
     (builder) => builder            //funcion constructora de casos
         .addCase(                   //cada caso implica un cambio de estado para una accion
@@ -29,4 +33,17 @@ const reducer = createReducer(
         )
 )
 
-export default reducer
+export const reducer_get_chapters = createReducer(
+    initial_state_chapters,
+    (builder) => builder
+        .addCase(
+            get_chapters.fulfilled,
+            (state, action) => {
+                let new_state ={
+                    ...state,
+                    chapters: action.payload.chapters
+                }
+                return new_state
+            }
+        )
+)

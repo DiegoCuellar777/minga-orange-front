@@ -16,41 +16,59 @@ export default function Register(props) {
     const navigate = useNavigate()
 
     const handleForm = (e) => {
+        e.preventDefault();
 
-        e.preventDefault()
+        let inputName = name.current.value;
+        let inputEmail = email.current.value;
+        let inputPhoto = photo.current.value;
+        let inputPassword = password.current.value;
+        let inputNotifications = notifications.current.value;
 
-        let inputName = name.current.value
-        let inputEmail = email.current.value
-        let inputPhoto = photo.current.value
-        let inputPassword = password.current.value
-        let inputNotifications = notifications.current.value
-        
-        let dataUser = {
+        let dataUserRegister = {
             name: inputName,
             email: inputEmail,
             photo: inputPhoto,
             password: inputPassword,
-            notifications: inputNotifications,
+            notifications: inputNotifications
         };
 
-        axios.post(apiUrl+"auth/signup", dataUser)
-        .then(res=>{
-            localStorage.setItem("token", res.data.token)
-            localStorage.setItem("user", JSON.stringify(res.data.user))
-            Swal.fire({
-                title: 'User created successfully',
-                icon: 'success',
-                showConfirmButton: true,
-                confirmButtonText: 'OK',
-                allowOutsideClick: false
-            })
-            navigate("/")
-        })
-        .catch(err=>{
-            console.log(err.response.data.message)
-            Swal.fire(`${err.response.data.message}`)
-        }) 
-    } 
+        let dataUser = {
+            email: inputEmail,
+            password: inputPassword
+        };
+
+        axios
+            .post(apiUrl + "auth/signup", dataUserRegister)
+            .then((res) => {
+                localStorage.setItem("user", JSON.stringify(res.data.user));
+                
+    
+            // Realizar la solicitud de inicio de sesión después de que la solicitud de registro haya finalizado
+            axios
+                .post(apiUrl + "auth/signin", dataUser)
+                .then((res) => {
+                    console.log(res);
+                    localStorage.setItem("token", res.data.token);
+                    localStorage.setItem("user", JSON.stringify(res.data.user));
+                    Swal.fire({
+                        title: "User created succesfully, welcome!",
+                        icon: "success",
+                        showConfirmButton: true,
+                        confirmButtonText: "OK",
+                        allowOutsideClick: false
+                });
+                navigate("/");
+              })
+              .catch((err) => {
+                console.log(err.response.data.message);
+                Swal.fire(`${err.response.data.message}`);
+              });
+          })
+          .catch((err) => {
+            console.log(err.response.data.message);
+            Swal.fire(`${err.response.data.message}`);
+          });
+      };
 
 
     return (

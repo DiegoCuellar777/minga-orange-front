@@ -66,7 +66,7 @@ export default function LogIn(props) {
 
                     <div className="flex flex-col items-center">
                         {props.setShow ? (
-                            <span className="w-[75%] text-xs mt-4">you don't have an account yet?  <span onClick={()=>props.setShow(false)} className="cursor-pointer text-red-600 font-bold">Log in</span></span>
+                            <span className="w-[75%] text-xs mt-4">you don't have an account yet?  <span onClick={()=>props.setShow(false)} className="cursor-pointer text-red-600 font-bold">Sign up</span></span>
                         ) : (
                             <Anchor to="/Register" className="w-[75%] text-xs mt-4">Already have an account? <span className="cursor-pointer text-red-600 font-bold">Sign in</span></Anchor>
                         )}
