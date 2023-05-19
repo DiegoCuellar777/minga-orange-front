@@ -27,7 +27,7 @@ const routes = createBrowserRouter([
         children: [
             { path: "/", element: <Index /> },
             { path: "/mangas/:page", element: <Mangas /> },
-            { path: "/yours-mangas", element: <MyMangas /> },
+            { path: "/mymangas", element: role >= 1 && token ? <MyMangas /> : <Navigate to="/" /> },
             { path: "/auth", element: <AuthForm /> },
             { path: "/register", element: <Register /> },
             { path: "/LogIn", element: <LogIn /> },
