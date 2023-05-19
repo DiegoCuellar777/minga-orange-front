@@ -21,7 +21,7 @@ export default function Page() {
   useEffect(() => {
     let token = localStorage.getItem('token');
     let headers = { headers: { Authorization: `Bearer ${token}` } };
-    axios(apiUrl + `chapters/${id}`, headers)
+    axios(apiUrl + `chapters/${id}/0`, headers)
       .then((res) => {
         setChapters(res.data.chapters)
       })
