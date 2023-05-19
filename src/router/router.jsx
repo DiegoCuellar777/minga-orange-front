@@ -4,7 +4,9 @@ import Register from "../pages/Register.jsx";
 import LogIn from "../pages/LogIn.jsx";
 import Index from "../pages/Index.jsx";
 import AuthForm from "../pages/AuthForm.jsx";
+import NewRole from "../pages/NewRole.jsx";
 import AuthorForm from "../pages/AuthorForm.jsx";
+import CompanyForm from "../pages/CompanyForm.jsx";
 import MangaForm from "../pages/MangaForm.jsx";
 import ChapterForm from "../pages/ChapterForm.jsx";
 import ErrorPage from "../pages/ErrorPage.jsx";
@@ -14,6 +16,7 @@ import Chapters from "../pages/Chapters.jsx";
 import Mangas from "../pages/Mangas.jsx"
 import MyMangas from "../pages/MyMangas.jsx";
 import Author from "../pages/Author.jsx";
+import PanelAdmin from "../pages/PanelAdmin.jsx";
 import EditChapters from "../pages/EditChapters.jsx";
 
 let token = localStorage.getItem("token");
@@ -31,14 +34,19 @@ const routes = createBrowserRouter([
             { path: "/auth", element: <AuthForm /> },
             { path: "/register", element: <Register /> },
             { path: "/LogIn", element: <LogIn /> },
-            { path: "/author-form", element: role === 0 ? <AuthorForm /> : <Navigate to="/" /> },
+            { path: "/new-role", element: role === 0 && token ? <NewRole /> : <Navigate to="/" /> },
+            { path: "/author-form", element: token ? <AuthorForm /> : <Navigate to="/" /> },
+            { path: "/company-form", element: token ? <CompanyForm /> : <Navigate to="/" /> },
             { path: "/manga-form", element: role >= 1 && token ? <MangaForm /> : <Navigate to="/" /> },
             { path: "/chapter-form", element: <ChapterForm/> },
             { path: "/chapters/:id/:page", element: <Page /> },
             { path: "/manga/:id", element: <MangaDetails /> },
             { path: "/manga/:id/:page", element: <Chapters /> },
             { path: "/authors/:id", element: token ? <Author /> : <ErrorPage /> },
+
             { path: "/edit/:manga_id", element: <EditChapters /> }
+  
+            { path: "/admin", element: role === 3 && token ? <PanelAdmin /> : <Navigate to="/" /> }
         ],
     },
     {

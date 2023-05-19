@@ -14,7 +14,7 @@ const { saveMangas } = save_author
 
 export default function Author() {
     const dispatch = useDispatch()
-    const store = useSelector(store => console.log(store.save_author))
+    useSelector(store => console.log(store.save_author))
     const {
         author_photo,
         author_name,
