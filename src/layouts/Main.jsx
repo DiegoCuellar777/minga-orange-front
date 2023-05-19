@@ -1,4 +1,3 @@
-import React from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Nav from '../components/Nav';
@@ -8,7 +7,6 @@ export default function Main() {
     const location = useLocation();
     const { id, page } = useParams();
 
-// array de objetos
     const navRoutes = [
         '/',
         '/author-form',
@@ -20,11 +18,13 @@ export default function Main() {
         '/manga/:id/:page',
         '/manga/:id',
         '/new-role',
-        '/admin'
+        '/admin',
+        '/mymangas'
     ];
 
     const viewNav = navRoutes.includes(location.pathname);
     const viewFooter = ['/manga-form', '/chapter-form', '/author-form', '/company-form', '/auth', '/new-role', '/admin'].includes(location.pathname);
+
 
     return (
         <div className="min-h-screen bg-black">
