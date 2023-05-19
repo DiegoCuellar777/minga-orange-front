@@ -63,7 +63,7 @@ function MangaForm() {
         }
         axios.post(apiUrl + 'mangas', data, headers)
             .then(res => {
-                res.Swal.fire({
+                Swal.fire({
                     title: 'Manga successfully created',
                     icon: 'success',
                     showConfirmButton: true,
