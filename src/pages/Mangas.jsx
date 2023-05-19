@@ -61,7 +61,7 @@ function Mangas() {
         }))
     }
 
-    useEffect(
+    useEffect( 
         () => {
             if (mangas.length === 0) {
                 dispatch(read_mangas({ title:title.current.value || "", cates, currentPage }))

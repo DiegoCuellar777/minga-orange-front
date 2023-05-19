@@ -157,7 +157,7 @@ function MyMangas() {
                                     </div>
                                     <div className="flex justify-evenly gap-2 items-center w-[50%] h-[10%] bg-[#ff3b3bbe]  rounded-t-md ">
                                         <button onClick={() => openModalEdit()} className="rounded-full  hover:text-[#ffffff80]"> <AiFillEdit className="w-4 h-4 " /> </button>
-                                        <button onClick={() => deleteManga(() => dispatch(delete_mangas_me({id:eachManga._id})))} className="rounded-full  hover:text-[#ffffff80]"> <AiFillDelete className="w-4 h-4 " /> </button>
+                                        <button onClick={() => deleteManga('Elimi',() => dispatch(delete_mangas_me({id:eachManga._id})))} className="rounded-full  hover:text-[#ffffff80]"> <AiFillDelete className="w-4 h-4 " /> </button>
                                     </div>
                                 </div>
                                 <p onClick={() => mangaDetails(eachManga._id)} className="text-[2px] font-[200] cursor-pointer sm:font-[300] sm:text-sm md:text-md ">{eachManga.title}</p>
