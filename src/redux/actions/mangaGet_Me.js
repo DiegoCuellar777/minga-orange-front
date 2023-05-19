@@ -7,10 +7,26 @@ const read_mangas_me = createAsyncThunk('read_mangas_me', async ({ title, cates 
         let token = localStorage.getItem('token')
         const headers = { headers: { Authorization: `Bearer ${token}` } }
         let res = await axios.get(apiUrl + 'mangas/me', headers)
-        console.log(cates)
         return {
             mangas_me: res.data.response,
             cates
+        }
+    } catch (error) {
+        return {
+            mangas_me: []
+        }
+    }
+})
+
+const delete_mangas_me = createAsyncThunk('delete_mangas_me', async ({ id }) => {
+    try {
+        const user = JSON.parse(localStorage.getItem("user"));
+        const userId = user.id;
+        const token = localStorage.getItem('token')
+        const headers = { headers: { Authorization: `Bearer ${token}` } }
+        let res = await axios.delete(apiUrl + 'mangas/' + id, headers, userId)
+        return {
+            idArr: id
         }
     } catch (error) {
         console.log(error)
@@ -20,22 +36,23 @@ const read_mangas_me = createAsyncThunk('read_mangas_me', async ({ title, cates 
     }
 })
 
-const delete_mangas_me = createAsyncThunk('delete_mangas_me', async (id) => {
+const upd_mangas_me = createAsyncThunk('upd_mangas_me', async ({ id, ...data }) => {
+    console.log(id)
+    console.log(data)
     try {
-        const user = JSON.parse(localStorage.getItem("user"));
-        const userId = user.id;
         const token = localStorage.getItem('token')
         const headers = { headers: { Authorization: `Bearer ${token}` } }
-        let res = await axios.put(apiUrl + `mangas/${id}`, headers)
+        let response = await axios.put(apiUrl + `mangas/${id}`, data, headers)
         return {
-            idArr: id
+            data: response.data.response
         }
     } catch (error) {
+        console.log(error)
         return {
             mangas_me: []
         }
     }
 })
 
-const actions = { read_mangas_me, delete_mangas_me }
+const actions = { read_mangas_me, delete_mangas_me, upd_mangas_me }
 export default actions
