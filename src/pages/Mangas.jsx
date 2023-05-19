@@ -40,7 +40,7 @@ function Mangas() {
         }
         captureText()
     }
-
+    
     function setCats(ids) {
         if (!cates.includes(ids)) {
             setCates([...cates, ids])
