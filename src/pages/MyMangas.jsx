@@ -14,6 +14,7 @@ import DeleteMangaAlert from '../components/DeleteMangaAlert.jsx'
 //import EditManga from "../components/EditManga.jsx"
 //import BrowserMangas from "../components/BrowserMangas.jsx";
 import SelectCategories from "../components/SelectCategories"
+import ErrorEdit from "../components/ErrorEdit"
 import EditManga from "../components/EditManga"
 //import MangaCard from "../components/MangaCard.jsx";
 
@@ -43,6 +44,7 @@ function MyMangas() {
     const [descEdit, setDescEdit] = useState('')
     const [categoryEdit, setCateEdit] = useState('')
     const [catEdit, setCatEdit] = useState('')
+    const [errorEdit, setErrorEdit] = useState(false)
 
     console.log(editItemId)
 
@@ -74,7 +76,9 @@ function MyMangas() {
         }
         captureText()
     }  */
+    const errorOfEdit = () => {
 
+    }
 
 
     const editChapter = (id) => {
@@ -88,17 +92,17 @@ function MyMangas() {
         navigate(`/manga/${id}`)
     }
 
-    
+
     const openModalEdit = (id) => {
         setIsModalOpen(true)
         setEditItemId(id)
     }
     const confirmEdit = () => {
         const data = {}
-        if (titleEdit){
+        if (titleEdit) {
             data.title = titleEdit
         }
-        if (photoEdit){
+        if (photoEdit) {
             data.cover_photo = photoEdit
         }
         if (descEdit) {
@@ -107,9 +111,20 @@ function MyMangas() {
         if (categoryEdit) {
             data.category_id = categoryEdit
         }
-        console.log(data)
-        dispatch(upd_mangas_me({ id: editItemId, ...data}))
+        dispatch(upd_mangas_me({ id: editItemId, ...data }))
         setIsModalOpen(false)
+        if (
+            titleEdit === "" 
+            && photoEdit === "" 
+            && descEdit === "" 
+            && categoryEdit === ""
+            ) { 
+                setErrorEdit(true)
+            }
+
+    }
+    const closeErrorEdit = () => {
+        setErrorEdit(false)
     }
     const closeModalEdit = () => {
         setIsModalOpen(false)
@@ -158,9 +173,15 @@ function MyMangas() {
 
     return (
         <>
+            {errorEdit && (
+                <ErrorEdit
+                    message="Ups! Unable to send empty"
+                    onCancel={closeErrorEdit}
+                />
+            )}
             {showAlertDelete && (
                 <DeleteMangaAlert
-                    message="¿Estás seguro de eliminar?"
+                    message="Are you sure want to delete?"
                     onConfirm={confirmDelete}
                     onCancel={handleCancel}
                 />
@@ -212,8 +233,8 @@ function MyMangas() {
                                 <div className="w-[22vw] md:w-[10rem] lg:w-[12rem] md:h-[14rem] lg:h-[19rem] sm:h-[3rem] h-[8rem] flex flex-col items-center justify-between absolute z-10">
 
                                     <div className="w-full relative z-4 h-full flex justify-end p-3 text-[#ffffff] drop-shadow-[0_1px_1px_rgba(100,0,0,1)] hover:drop-shadow-[0_2px_3px_rgba(100,0,0,1)] duration-100">
-                                        <BsFillPatchPlusFill onClick={()=>moreChapter(eachManga._id)} className="hover:text-[#ffffff80] duration-100" />
-                                        <RiEditBoxFill onClick={()=>editChapter(eachManga._id)} className="hover:text-[#ffffff80] duration-100" />
+                                        <BsFillPatchPlusFill onClick={() => moreChapter(eachManga._id)} className="hover:text-[#ffffff80] duration-100" />
+                                        <RiEditBoxFill onClick={() => editChapter(eachManga._id)} className="hover:text-[#ffffff80] duration-100" />
                                     </div>
                                     <div className="flex justify-evenly gap-2 items-center w-[50%] h-[10%] bg-[#ff3b3bbe]  rounded-t-md ">
                                         <button onClick={() => openModalEdit(eachManga._id)} className="rounded-full  hover:text-[#ffffff80]"> <AiFillEdit className="w-4 h-4 " /> </button>

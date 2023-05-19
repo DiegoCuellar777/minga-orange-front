@@ -3,7 +3,7 @@ import { useEffect } from "react"
 import categories_actions from "../redux/actions/mangasGet"
 const { read_categories } = categories_actions
 
-function SelectCategories({cat}) {
+function SelectCategories({cat, classInput}) {
 
     const categories = useSelector(store => store.mangasGet_reducer.categories)
     const dispatch = useDispatch()
@@ -21,7 +21,7 @@ function SelectCategories({cat}) {
     <select
         ref={cat}
         name="select"
-        className="text-white border-b-[1px] outline-none bg-transparent text-[2px] font-montserrat"
+        className={classInput}
         id=""
     >
         <option className='text-black' disabled value="">Insert category</option>
