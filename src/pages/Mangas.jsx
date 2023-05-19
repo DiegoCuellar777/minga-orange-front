@@ -15,6 +15,7 @@ const { read_mangas, read_categories } = mangas_actions
 
 function Mangas() {
 
+    const store = useSelector(store=>store)
     const imageMangaNoFound = <img className="w-[10rem] absolute right-100 bottom-52" src={mangaNoFound} alt="mangaNofound" />
     const mangas = useSelector(store => store.mangasGet_reducer.mangas)
     const categories = useSelector(store => store.mangasGet_reducer.categories)
@@ -25,6 +26,8 @@ function Mangas() {
     const [reload, setReload] = useState(false)
     const {cates, setCates} = useState([])
     const [currentPage, setCurrentPage] = useState(1)
+
+    console.log(store)
 
     const prevPage = () => {
         if (currentPage > 1) {
