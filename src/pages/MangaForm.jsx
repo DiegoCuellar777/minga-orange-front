@@ -187,10 +187,10 @@ function MangaForm() {
                     <h1 className="text-white font-montserrat text-[1.6rem] font-light">New Manga</h1>
                     <form onSubmit={(e) => handleForm(e)} className="flex flex-col items-center w-[13rem] h-[18rem] justify-around">
                         <div className='flex-col flex w-full gap-5'>
-                            <input onKeyUp={saveData} className="text-white text-[2px] px-[3px] outline-none bg-transparent border-b-[1px] placeholder:font-montserrat placeholder:text-white" ref={title} type="text" name="insert" placeholder="Insert title" id="insertTitle" />
+                            <input onKeyUp={saveData} className="text-white text-sm px-[3px] outline-none bg-transparent border-b-[1px] placeholder:font-montserrat placeholder:text-white" ref={title} type="text" name="insert" placeholder="Insert title" id="insertTitle" />
                             <SelectCategories onChange={saveData} category={category} cat={cat} />
-                            <input onKeyUp={saveData} className="text-white text-[2px] px-[3px] outline-none bg-transparent border-b-[1px] placeholder:font-montserrat placeholder:text-white" ref={urlPhoto} type="text" name="insert" placeholder="insert url image of manga" id="insertPhoto" />
-                            <input onKeyUp={saveData} className="text-white text-[2px] px-[3px] outline-none bg-transparent border-b-[1px] placeholder:font-montserrat placeholder:text-white" ref={description} type="text" name="insert" placeholder="insert description" id="insertDescription" />
+                            <input onKeyUp={saveData} className="text-white text-sm px-[3px] outline-none bg-transparent border-b-[1px] placeholder:font-montserrat placeholder:text-white" ref={urlPhoto} type="text" name="insert" placeholder="insert url image of manga" id="insertPhoto" />
+                            <input onKeyUp={saveData} className="text-white text-sm px-[3px] outline-none bg-transparent border-b-[1px] placeholder:font-montserrat placeholder:text-white" ref={description} type="text" name="insert" placeholder="insert description" id="insertDescription" />
                         </div>
                         <input className="bg-white w-full h-10 rounded-[4px] font-montserrat font-extrabold" type="submit" value="Send" />
                     </form>
