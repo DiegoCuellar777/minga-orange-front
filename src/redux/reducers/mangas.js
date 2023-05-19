@@ -1,13 +1,17 @@
 import { createReducer } from "@reduxjs/toolkit";
 import mangasAction from '../actions/mangas'
 
-const { readOneManga } = mangasAction
+const { readOneManga, getMangaDataAsync } = mangasAction
 
 let initialState = {
     cover_photo: ''
 }
 
-const reducer = createReducer(
+let initialStateAsync = {
+    manga: []
+}
+
+export const reducer = createReducer(
     initialState,
     (builder) => builder
         .addCase(
@@ -24,4 +28,18 @@ const reducer = createReducer(
         )
 )
 
-export default reducer
+export const reducerAsync = createReducer(
+    initialStateAsync,
+    (builder) => builder
+        .addCase(
+            getMangaDataAsync.fulfilled,
+            (state,action)=>{
+                const new_state = {
+                    ...state,
+                    manga: action.payload.manga 
+                }
+                return new_state
+            }
+        )
+)
+
