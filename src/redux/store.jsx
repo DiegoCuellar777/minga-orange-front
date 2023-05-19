@@ -4,6 +4,7 @@ import mangaCards from './reducers/mangaCards'
 import save_author from "../redux/reducers/save_author"
 import chapterData from "./reducers/chapterData"
 import inputs_mangaForm from './reducers/inputs_mangaForm'
+import commentReducer from './reducers/comments'
 
 const store = configureStore({
     reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
         dataChapter: chapterData,
         pageMangas: mangaCards,
         mangaForn: inputs_mangaForm,
+        commentStore: commentReducer,
     }
 })
 
