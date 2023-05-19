@@ -2,7 +2,7 @@ import { createReducer } from "@reduxjs/toolkit";
 //Se importan las acciones
 import chapterDataAction from "../actions/chapterData"
 //Desestructuro las acciones que necesito configurar 
-const { chapterData, get_chapters, delete_chapter } = chapterDataAction
+const { chapterData, get_chapters, delete_chapter, update_chapter } = chapterDataAction
 //Defino estado inicial 
 let initial_state = {
     title: "",
@@ -46,4 +46,29 @@ export const reducer_get_chapters = createReducer(
                 return new_state
             }
         )
+        .addCase(delete_chapter.fulfilled, (state, action) => {
+            let newState = {
+                ...state,
+                chapters: state.chapters.filter(
+                    (chapter) => chapter._id !== action.payload.id_to_remove
+                ),
+            };
+            return newState;
+        })
+        .addCase(update_chapter.fulfilled, (state, action) => {
+            const updatedChapter = action.payload.data; // Capta el capítulo actualizado desde el payload
+        
+            const updatedChapters = state.chapters.map((chapter) => {
+                if (chapter._id === updatedChapter._id) {
+                    return updatedChapter; // Reemplaza el capítulo existente con el capítulo actualizado
+                } else {
+                    return chapter; // Mantiene los demás capítulos sin cambios
+                }
+            });
+        
+            return {
+                ...state,
+                chapters: updatedChapters,
+            };
+        })
 )
