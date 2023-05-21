@@ -26,7 +26,7 @@ const delete_mangas_me = createAsyncThunk('delete_mangas_me', async ({ id }) => 
         const headers = { headers: { Authorization: `Bearer ${token}` } }
         let res = await axios.delete(apiUrl + 'mangas/' + id, headers, userId)
         return {
-            idArr: id
+            mangas_me: id
         }
     } catch (error) {
         console.log(error)
@@ -37,14 +37,12 @@ const delete_mangas_me = createAsyncThunk('delete_mangas_me', async ({ id }) => 
 })
 
 const upd_mangas_me = createAsyncThunk('upd_mangas_me', async ({ id, ...data }) => {
-    console.log(id)
-    console.log(data)
     try {
         const token = localStorage.getItem('token')
         const headers = { headers: { Authorization: `Bearer ${token}` } }
         let response = await axios.put(apiUrl + `mangas/${id}`, data, headers)
         return {
-            data: response.data.response
+            mangas_me: response.data.response
         }
     } catch (error) {
         console.log(error)
