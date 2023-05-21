@@ -23,7 +23,15 @@ export default function Main() {
     ];
 
     const viewNav = navRoutes.includes(location.pathname);
-    const viewFooter = ['/manga-form', '/chapter-form', '/author-form', '/company-form', '/auth', '/new-role', '/admin'].includes(location.pathname);
+    const viewFooter = [
+        '/manga-form',
+        '/chapter-form',
+        '/author-form',
+        '/company-form',
+        '/auth',
+        '/new-role',
+        '/admin'
+    ].includes(location.pathname);
 
 
     return (
