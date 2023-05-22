@@ -2,14 +2,17 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import apiUrl from "../../../api";
 import axios from "axios";
 
-const read_mangas = createAsyncThunk('read_mangas', async ({ title, idArr, currentPage }) => {
-
+const read_mangas = createAsyncThunk('read_mangas', async ({ cates, title, currentPage }) => {
+    console.log(currentPage)
     try {
         let token = localStorage.getItem('token')
         const headers = { headers: { Authorization: `Bearer ${token}` } }
-        let res = await axios.get(apiUrl + 'mangas', headers)
+        let res = await axios.get(apiUrl + `mangas?page=${currentPage}`, headers)
         return {
-            mangas: res.data.response
+            mangas: res.data.response,
+            title,
+            currentPage,
+            cates
         }
     } catch (error) {
         return {

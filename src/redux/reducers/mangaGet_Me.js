@@ -15,15 +15,22 @@ const reducer = createReducer(
         ...state,
         mangas_me: []
       }
-
-      if (action.payload.cates?.length > 0) {
+      if (action.payload.cates?.length > 0 && action.payload.title?.length > 0) {
+        newState.mangas_me = action.payload.mangas_me.filter(
+          manga => action.payload.cates.includes(manga.category_id) &&
+            manga.title.includes(action.payload.title)
+        )
+      } else if (action.payload.cates?.length > 0) {
         newState.mangas_me = action.payload.mangas_me.filter(
           manga => action.payload.cates.includes(manga.category_id)
         )
+      } else if (action.payload.title?.length > 0) {
+        newState.mangas_me = action.payload.mangas_me.filter(
+          manga => manga.title.includes(action.payload.title)
+        )
       } else {
-        newState.mangas_me = action.payload.mangas_me;
+        newState.mangas_me = action.payload.mangas_me
       }
-
       return newState;
     }
   )
@@ -32,8 +39,8 @@ const reducer = createReducer(
       (state, action) => {
         let newState = {
           ...state,
-          manga_me: state.mangas_me.filter(each =>
-            each._id !== action.payload.idArr
+          mangas_me: state.mangas_me.filter(each =>
+            each._id !== action.payload.mangas_me
           )
         }
         return newState
@@ -45,8 +52,8 @@ const reducer = createReducer(
         let newState = {
           ...state,
           mangas_me: state.mangas_me.map(each => {
-            if (each._id === action.payload.data._id) {
-              return action.payload.data
+            if (each._id === action.payload.mangas_me._id) {
+              return action.payload.mangas_me
             } else {
               return each
             }

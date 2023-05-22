@@ -1,9 +1,10 @@
 import { useSelector, useDispatch } from "react-redux"
 import { useEffect } from "react"
+import { AiFillCaretDown } from "react-icons/ai"
 import categories_actions from "../redux/actions/mangasGet"
 const { read_categories } = categories_actions
 
-function SelectCategories({cat, classInput}) {
+function SelectCategories({ cat, classInput, selectClass, categoryEdit }) {
 
     const categories = useSelector(store => store.mangasGet_reducer.categories)
     const dispatch = useDispatch()
@@ -15,22 +16,25 @@ function SelectCategories({cat, classInput}) {
         },
         []
     )
-    
-    return (
 
-    <select
-        ref={cat}
-        name="select"
-        className={classInput}
-        id=""
-    >
-        <option className='text-black' disabled value="">Insert category</option>
-        {categories?.map((category) => (
-            <option className='text-black' id={category._id} value={category._id} key={category._id}>
-                {category.name}
-            </option>
-        ))}
-    </select> 
+    return (
+        <div className={selectClass}>
+            <AiFillCaretDown className="absolute right-0" />
+            <select
+                ref={cat}
+                name="select"
+                onChange={categoryEdit}
+                className={classInput}
+                id=""
+            >
+                <option selected disabled value="">Insert category</option>
+                {categories?.map((category) => (
+                    <option id={category._id} value={category._id} key={category._id}>
+                        {category.name}
+                    </option>
+                ))}
+            </select>
+        </div>
     )
 }
 

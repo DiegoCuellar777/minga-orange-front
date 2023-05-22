@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link as Anchor, useNavigate, useParams, useLocation } from "react-router-dom"
+import { Link as Anchor, useNavigate, useLocation } from "react-router-dom"
 import Logo from "../assets/images/Logo.png";
 import apiUrl from "../../api";
 import axios from "axios";
@@ -9,7 +9,6 @@ export default function Nav() {
 
     const navigate = useNavigate()
     const location = useLocation()
-    const { page } = useParams()
 
     const handleMenuClick = () => {
         setIsOffcanvasOpen(!isOffcanvasOpen);
@@ -37,11 +36,10 @@ export default function Nav() {
     let role = JSON.parse(localStorage.getItem("user"))?.role
     let photo = JSON.parse(localStorage.getItem("user"))?.photo
     let email = JSON.parse(localStorage.getItem("user"))?.email
-
-
+    
 
     return (
-        <nav className="fixed h-[10vh] flex justify-between p-4 w-full z-10 s border-gradient-to-r from-transparent to-transparent via-white">
+        <nav className="fixed h-[10vh] flex justify-between p-4 w-full z-40 border-gradient-to-r from-transparent to-transparent via-white">
             <button className="contents" onClick={handleMenuClick}>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -62,7 +60,7 @@ export default function Nav() {
                 <img className="h-[5vh]" src={Logo} alt="logo" to={'/'} />
             </Anchor>
             {isOffcanvasOpen && (
-                <div className="flex flex-col items-center w-full md:w-[20rem] h-[100%] fixed bg-gradient-to-r hover:bg-[#89977928] from-neutral-500 to-[#000000e3] order-2 top-0 left-0 text-black z-50">
+                <div className="flex flex-col items-center w-full md:w-[20rem] h-[100%] fixed bg-gradient-to-r from-neutral-500 to-[#000000ef] order-2 top-0 left-0 text-black">
                     <div className="flex justify-between w-[100%] items-center">
                         {token && <div className="flex items-center p-2">
                             <img className="bg-black w-[40px] h-[40px] rounded-[100%] mr-2" src={photo} alt="" />
@@ -81,7 +79,7 @@ export default function Nav() {
                             {!token && <Anchor to={'/auth'} className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]" onClick={handleCloseOffcanvas}>Log In</Anchor>}
                             {!token && <Anchor to={'/auth'} className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]">Register</Anchor>}
                             {token && <Anchor to={'/'} className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]">Home</Anchor>}
-                            {token && <Anchor to={`/mangas/:page`} className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]">Mangas</Anchor>}
+                            {token && <Anchor to={"/mangas"} className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]">Mangas</Anchor>}
                             {role >= 1 && <Anchor to={'/mymangas'} className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]">My Mangas</Anchor>}
                             {role >= 1 && <Anchor to={'/manga-form'} className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]">New Manga</Anchor>}
                             {token && <Anchor className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]">Favourites</Anchor>}
