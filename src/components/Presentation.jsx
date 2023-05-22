@@ -7,13 +7,13 @@ import anime4 from "../assets/images/anime4.png";
 
 export default function Presentation() {
     return (
-        <div className="h-[90vh] flex">
+        <div className="h-[100vh] flex">
             <div className="h-[60%] w-[50%] rounded-full bg-gradient-to-r from-black to-[#15803d] blur-[115px]"></div>
             <div className="h-[60%] w-[50%] rounded-full bg-gradient-to-r from-black to-indigo-600 blur-[115px]"></div>
-            <div className="h-[100vh] w-[100%] absolute top-[25%]">
+            <div className="h-[100vh] w-full absolute top-[25%]">
                 <div className="flex justify-center align-center ">
                     <img
-                        className="h-[50%] origin-center rotate-[20deg] absolute brightness-50	"
+                        className="h-[50%] origin-center rotate-[16deg] absolute brightness-50	"
                         src={anime4}
                         alt="anime4"
                     />
@@ -28,12 +28,12 @@ export default function Presentation() {
                         alt="anime2"
                     />
                     <img
-                        className="h-[50%] origin-center absolute ease-in duration-300 hover:scale-110 brightness-50	"
+                        className="h-[51%] origin-center rotate-[3deg] absolute ease-in duration-300 hover:scale-110 brightness-50	"
                         src={anime1}
                         alt="anime1"
                     />
                     <div className='absolute h-[65vh] flex flex-col items-center justify-between'>
-                        <h1 className="mt-[15%] mb-[2rem] text-white font-bold	text-7xl not-italic flex text-center sm:justify-center font-montserrat">
+                        <h1 className="mt-[20%] mb-[2rem] text-white font-bold text-[3.5rem] md:text-7xl not-italic flex text-center sm:justify-center font-montserrat">
                             Best manga reader
                         </h1>
                         <button className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-md transition duration-200 ease-in-out md:w-40 lg:w-48">
