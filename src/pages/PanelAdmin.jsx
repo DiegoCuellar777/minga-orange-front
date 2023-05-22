@@ -23,7 +23,7 @@ export default function PanelAdmin() {
     let inactiveCompanies = store.companies.inactive
     let companies = (inactiveCompanies ?? []).concat(activeCompanies ?? [])
 
-    console.log(store)
+    /* console.log(store) */
 
     useEffect(() => {
         if (!authors.length || !companies.length) {
