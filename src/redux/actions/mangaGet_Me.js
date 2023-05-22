@@ -3,12 +3,14 @@ import apiUrl from "../../../api";
 import axios from "axios";
 
 const read_mangas_me = createAsyncThunk('read_mangas_me', async ({ title, cates }) => {
+    title
     try {
         let token = localStorage.getItem('token')
         const headers = { headers: { Authorization: `Bearer ${token}` } }
         let res = await axios.get(apiUrl + 'mangas/me', headers)
         return {
             mangas_me: res.data.response,
+            title,
             cates
         }
     } catch (error) {

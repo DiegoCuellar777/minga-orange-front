@@ -19,9 +19,7 @@ function MangaCard_Me(props) {
 
     const mangas_me = useSelector(store => store.mangasGetMe_reducer.mangas_me)
     const imageMangaNoFound = <img className="w-[10rem] absolute right-100 bottom-52" src={mangaNoFound} alt="mangaNofound" />
-    const { read_mangas_me } = mangas_actions
     const navigate = useNavigate()
-    const dispatch = useDispatch()
 
     // ROUTES >>>>>>>>>>>>>>>>>>>>><><><>
     const editChapter = (id) => {
@@ -38,17 +36,10 @@ function MangaCard_Me(props) {
     }
     // >>>>>>>>>>>>>>>>>>>>>>>>>>>>><><><>
 
-    useEffect(
-        () => {
-            dispatch(read_mangas_me({ title: title || "", cates }))
-        },
-        [cates]
-    )
-
     return (
         <>
             {mangas_me.length > 0 ? mangas_me.map((eachManga, index) => (
-                <div key={index} className="h-full w-[26vw] md:w-[10rem] z-10 lg:w-[12rem] text-[#979797] hover:text-white font-semibold md:h-[16rem] lg:h-[21rem] lg:min-h-[21rem] flex-col flex justify-between hover:scale-[1.05] hover:-translate hover:drop-shadow-[0_0_100px_rgba(250,0,0,0.5)] duration-100 ease-in">
+                <div key={index} className="h-full w-[26vw] md:w-[10rem] z-10 lg:w-[12rem] text-[#979797] hover:text-white hover:font-semibold md:h-[16rem] lg:h-[21rem] lg:min-h-[21rem] flex-col flex justify-between hover:scale-[1.05] hover:-translate hover:drop-shadow-[0_0_100px_rgba(250,0,0,0.5)] duration-100 ease-in">
                     <img className="sm:h-[3rem] h-[8rem] relative z-1 cursor-pointer md:h-[14rem] lg:h-[19rem] object-cover rounded-md" src={eachManga.cover_photo} alt="" />
                     <p onClick={() => handleMangaDetails(eachManga._id)} className="text-[2px] font-[200] cursor-pointer sm:font-[300] sm:text-sm md:text-md ">{eachManga.title}</p>
                     <div className="w-[22vw] md:w-[10rem] lg:w-[12rem] md:h-[14rem] lg:h-[19rem] sm:h-[3rem] h-[8rem] flex flex-col items-center justify-between absolute z-10">

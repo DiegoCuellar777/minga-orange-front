@@ -15,12 +15,21 @@ const reducer = createReducer(
         ...state,
         mangas_me: []
       }
-      if (action.payload.cates?.length > 0) {
+      if (action.payload.cates?.length > 0 && action.payload.title?.length > 0) {
+        newState.mangas_me = action.payload.mangas_me.filter(
+          manga => action.payload.cates.includes(manga.category_id) &&
+            manga.title.includes(action.payload.title)
+        )
+      } else if (action.payload.cates?.length > 0) {
         newState.mangas_me = action.payload.mangas_me.filter(
           manga => action.payload.cates.includes(manga.category_id)
         )
+      } else if (action.payload.title?.length > 0) {
+        newState.mangas_me = action.payload.mangas_me.filter(
+          manga => manga.title.includes(action.payload.title)
+        )
       } else {
-        newState.mangas_me = action.payload.mangas_me;
+        newState.mangas_me = action.payload.mangas_me
       }
       return newState;
     }
