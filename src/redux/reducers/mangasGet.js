@@ -12,17 +12,33 @@ const reducer = createReducer(
     (builder) => builder
         .addCase(
             read_mangas.fulfilled,
-            (state,action) => {
+            (state, action) => {
                 let newState = {
                     ...state,
-                    mangas: action.payload.mangas
+                    mangas: []
+                }
+                if (action.payload.cates?.length > 0 && action.payload.title?.length > 0) {
+                    newState.mangas = action.payload.mangas.filter(
+                        manga => action.payload.cates.includes(manga.category_id) &&
+                            manga.title.includes(action.payload.title)
+                    )
+                } else if (action.payload.cates?.length > 0) {
+                    newState.mangas = action.payload.mangas.filter(
+                        manga => action.payload.cates.includes(manga.category_id)
+                    )
+                } else if (action.payload.title?.length > 0) {
+                    newState.mangas = action.payload.mangas.filter(
+                        manga => manga.title.includes(action.payload.title)
+                    )
+                } else {
+                    newState.mangas = action.payload.mangas
                 }
                 return newState
             }
         )
         .addCase(
             read_categories.fulfilled,
-            (state,action) => {
+            (state, action) => {
                 let newState = {
                     ...state,
                     categories: action.payload.categories
@@ -33,3 +49,4 @@ const reducer = createReducer(
 )
 
 export default reducer
+
