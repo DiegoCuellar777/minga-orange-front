@@ -2,10 +2,10 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import apiUrl from "../../../api";
 import axios from "axios";
 
-let token = localStorage.getItem("token")
-let headers = { headers: { "Authorization": `Bearer ${token}` } }
-
 const get_authors = createAsyncThunk('get_authors', async () => {
+    let token = localStorage.getItem("token")
+    let headers = { headers: { "Authorization": `Bearer ${token}` } }
+
     try {
         let res = await axios(apiUrl + 'api/authors/admin', headers)
         return {
@@ -19,9 +19,12 @@ const get_authors = createAsyncThunk('get_authors', async () => {
 })
 
 const update_authors = createAsyncThunk('update_authors', async ({ id, data }) => {
+    let token = localStorage.getItem("token")
+    let headers = { headers: { "Authorization": `Bearer ${token}` } }
+
     try {
         let res = await axios.put(apiUrl + 'auth/role/author/' + id, data, headers)
-        console.log(res.data.update)
+        console.log(res.data.message)
         return {
             author: res.data.update,
             active: res.data.update.active

@@ -2,10 +2,10 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import apiUrl from "../../../api";
 import axios from "axios";
 
-let token = localStorage.getItem("token")
-let headers = { headers: { "Authorization": `Bearer ${token}` } }
-
 const get_companies = createAsyncThunk('get_companies', async () => {
+    let token = localStorage.getItem("token")
+    let headers = { headers: { "Authorization": `Bearer ${token}` } }
+
     try {
         let res = await axios(apiUrl + 'api/companies/admin', headers)
         return {
@@ -19,6 +19,9 @@ const get_companies = createAsyncThunk('get_companies', async () => {
 })
 
 const update_companies = createAsyncThunk('update_companies', async ({ id, data }) => {
+    let token = localStorage.getItem("token")
+    let headers = { headers: { "Authorization": `Bearer ${token}` } }
+
     try {
         let res = await axios.put(apiUrl + 'auth/role/company/' + id, data, headers)
         console.log(res.data.update)

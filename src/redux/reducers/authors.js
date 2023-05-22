@@ -25,7 +25,7 @@ const reducer = createReducer(
         .addCase(
             update_authors.fulfilled,
             (state, action) => {
-                console.log(state.active)
+                /* console.log(state.active) */
                 if (action.payload.active) {
                     let newState = {
                         ...state,
