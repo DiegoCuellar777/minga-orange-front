@@ -19,7 +19,8 @@ export default function Main() {
         '/manga/:id',
         '/new-role',
         '/admin',
-        '/mymangas'
+        '/mymangas',
+        '/donation'
     ];
 
     const viewNav = navRoutes.includes(location.pathname);

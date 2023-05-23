@@ -18,6 +18,7 @@ import MyMangas from "../pages/MyMangas.jsx";
 import Author from "../pages/Author.jsx";
 import PanelAdmin from "../pages/PanelAdmin.jsx";
 import EditChapters from "../pages/EditChapters.jsx";
+import Donation from "../pages/Donation.jsx";
 
 let token = localStorage.getItem("token");
 let role = JSON.parse(localStorage.getItem("user"))?.role;
@@ -43,6 +44,7 @@ const routes = createBrowserRouter([
             { path: "/manga/:id", element: <MangaDetails /> },
             { path: "/manga/:id/:page", element: <Chapters /> },
             { path: "/authors/:id", element: token ? <Author /> : <ErrorPage /> },
+            {path: "/donation", element: <Donation/>},
 
             {path: "/edit/:manga_id", element: (role === 1 || role === 2) && token ? <EditChapters /> : <Navigate to="/" />},
 
