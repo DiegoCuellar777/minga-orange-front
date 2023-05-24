@@ -22,12 +22,11 @@ function SelectCategories({ cat, classInput, selectClass, categoryEdit }) {
             <AiFillCaretDown className="absolute right-0" />
             <select
                 ref={cat}
-                name="select"
                 onChange={categoryEdit}
                 className={classInput}
                 id=""
             >
-                <option selected disabled value="">Insert category</option>
+                <option disabled defaultValue="">Insert category</option>
                 {categories?.map((category) => (
                     <option id={category._id} value={category._id} key={category._id}>
                         {category.name}

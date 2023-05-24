@@ -7,7 +7,8 @@ import Swal from 'sweetalert2'
 import SelectCategories from '../components/SelectCategories.jsx';
 import { useSelector, useDispatch } from 'react-redux'
 import action from '../redux/actions/inputs_mangaForm';
-
+import InputUploadImg from '../components/mangaForm/InputUploadImg.jsx';
+import ButtonUpImg from '../components/mangaForm/ButtonUpImg';
 
 function MangaForm() {
 
@@ -70,11 +71,13 @@ function MangaForm() {
                 <div className="flex flex-col items-center justify-between p-6 w-full h-[25rem]">
                     <h1 className="text-white font-montserrat text-[1.6rem] font-light">New Manga</h1>
                     <form onSubmit={(e) => handleForm(e)} encType="multipart/form-data" className="flex flex-col items-center w-[13rem] h-[18rem] justify-around">
-                        <div className='flex-col flex w-full gap-5'>
-                            <input onChange={saveData} className="text-white text-sm px-[5px] outline-none bg-transparent border-b-[1px] placeholder:font-montserrat placeholder:text-white" ref={title} type="text" name="insert" placeholder="Insert title" id="insertTitle" />
+                        <div>
+                            <div className='flex-col flex w-full gap-5'>
+                            <input onChange={saveData} autoComplete="off" className="text-white text-sm px-[5px] outline-none bg-transparent border-b-[1px] placeholder:font-montserrat placeholder:text-white" ref={title} type="text" name="insert" placeholder="Insert title" id="insertTitle" />
                             <SelectCategories onChange={saveData} classInput={classInput} selectClass={selectClass} category={category} cat={cat} />
-                            <input onChange={saveData} className="text-white text-sm px-[5px] outline-none bg-transparent border-b-[1px] placeholder:font-montserrat placeholder:text-white" ref={description} type="text" name="insert" placeholder="insert description" id="insertDescription" />
-                            <input onChange={saveData} ref={uploadInput} className="text-white text-[2px] px-[5px] outline-none bg-transparent border-b-[1px] placeholder:font-montserrat placeholder:text-white" type="file" name="cover_photo" id="upload" />
+                            <input onChange={saveData} autoComplete="off" className="text-white text-sm px-[5px] outline-none bg-transparent border-b-[1px] placeholder:font-montserrat placeholder:text-white" ref={description} type="text" name="insert" placeholder="insert description" id="insertDescription" />
+                            </div>
+                            <InputUploadImg saveData={saveData} uploadInput={uploadInput} />
                         </div>
                         <input className="bg-white w-full h-10 rounded-[4px] font-montserrat font-extrabold" type="submit" value="Send" />
                     </form>

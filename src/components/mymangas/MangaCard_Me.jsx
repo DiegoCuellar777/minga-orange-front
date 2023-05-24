@@ -4,8 +4,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 import { BsFillPatchPlusFill } from "react-icons/bs";
 import { RiEditBoxFill } from "react-icons/ri";
-import mangaNoFound from '../assets/images/R.png'
-import mangas_actions from '../redux/actions/mangaGet_Me'
+import mangaNoFound from '../../assets/images/R.png'
+import mangas_actions from '../../redux/actions/mangaGet_Me'
 
 function MangaCard_Me(props) {
 
