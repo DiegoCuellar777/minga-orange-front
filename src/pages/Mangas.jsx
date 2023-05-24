@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from "react"
-import { useNavigate } from "react-router-dom"
+import { useState, useEffect } from "react"
+import { useNavigate, useParams } from "react-router-dom"
 import { useSelector, useDispatch } from 'react-redux'
 import actions from '../redux/actions/mangasCards'
 import mangas_actions from '../redux/actions/mangasGet'
@@ -24,7 +24,6 @@ function Mangas() {
     const categories = useSelector(store => store.mangasGet_reducer.categories)
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const { page } = dispatch
     const [title, setTitleValue] = useState('')
     const [cates, setCates] = useState([])
     const [currentPage, setCurrentPage] = useState(1)
