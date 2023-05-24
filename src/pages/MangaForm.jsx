@@ -22,7 +22,7 @@ function MangaForm() {
         let data = {
             title: title.current.value,
             category_id: cat.current.value,
-            cover_photo: urlPhoto.current.value,
+            //cover_photo: urlPhoto.current.value,
             description: description.current.value
         }
         dispatch(createMangaForm(data))
@@ -30,23 +30,24 @@ function MangaForm() {
 
     let title = useRef(null)
     let cat = useRef(null)
-    let urlPhoto = useRef("")
+    let uploadInput = useRef(null);
     let description = useRef(null)
 
     function handleForm(e) {
-        e.preventDefault()
+        e.preventDefault();
         const user = JSON.parse(localStorage.getItem("user"));
         const userId = user.id;
-        const token = localStorage.getItem('token')
-        const headers = { headers: { Authorization: `Bearer ${token}` } }
-        const data = {
-            author_id: userId,
-            title: title.current.value,
-            cover_photo: urlPhoto.current.value,
-            description: description.current.value,
-            category_id: cat.current.value,
-        }
-        axios.post(apiUrl + 'mangas', data, headers)
+        const token = localStorage.getItem('token');
+        const headers = { headers: { Authorization: `Bearer ${token}` } };
+
+        const formData = new FormData();
+        formData.append('author_id', userId);
+        formData.append('title', title.current.value);
+        formData.append('description', description.current.value);
+        formData.append('category_id', cat.current.value);
+        formData.append('cover_photo', uploadInput.current.files[0]);
+
+        axios.post(apiUrl + 'mangas', formData, headers)
             .then(res => {
                 Swal.fire({
                     title: 'Manga successfully created',
@@ -68,12 +69,12 @@ function MangaForm() {
             <div className="w-full h-screen flex flex-col bg-black items-center justify-center">
                 <div className="flex flex-col items-center justify-between p-6 w-full h-[25rem]">
                     <h1 className="text-white font-montserrat text-[1.6rem] font-light">New Manga</h1>
-                    <form onSubmit={(e) => handleForm(e)} className="flex flex-col items-center w-[13rem] h-[18rem] justify-around">
+                    <form onSubmit={(e) => handleForm(e)} encType="multipart/form-data" className="flex flex-col items-center w-[13rem] h-[18rem] justify-around">
                         <div className='flex-col flex w-full gap-5'>
                             <input onChange={saveData} className="text-white text-sm px-[5px] outline-none bg-transparent border-b-[1px] placeholder:font-montserrat placeholder:text-white" ref={title} type="text" name="insert" placeholder="Insert title" id="insertTitle" />
                             <SelectCategories onChange={saveData} classInput={classInput} selectClass={selectClass} category={category} cat={cat} />
-                            <input onChange={saveData} className="text-white text-sm px-[5px] outline-none bg-transparent border-b-[1px] placeholder:font-montserrat placeholder:text-white" ref={urlPhoto} type="text" name="insert" placeholder="insert url image of manga" id="insertPhoto" />
                             <input onChange={saveData} className="text-white text-sm px-[5px] outline-none bg-transparent border-b-[1px] placeholder:font-montserrat placeholder:text-white" ref={description} type="text" name="insert" placeholder="insert description" id="insertDescription" />
+                            <input onChange={saveData} ref={uploadInput} className="text-white text-[2px] px-[5px] outline-none bg-transparent border-b-[1px] placeholder:font-montserrat placeholder:text-white" type="file" name="cover_photo" id="upload" />
                         </div>
                         <input className="bg-white w-full h-10 rounded-[4px] font-montserrat font-extrabold" type="submit" value="Send" />
                     </form>
@@ -84,5 +85,4 @@ function MangaForm() {
 }
 
 export default MangaForm
-
 
