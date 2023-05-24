@@ -11,6 +11,7 @@ export default function Footer() {
             behavior: 'smooth',
         });
     };
+    
     return (
         <footer className="bg-transparent  text-white">
             <img
@@ -52,13 +53,14 @@ export default function Footer() {
                         </a>
                         {/* Resto de enlaces */}
                     </div>
-                    <button
+                    <Link to="/donation"
                         className="w-full sm:w-1/2 bg-white rounded-[5px] text-black rounded-4px p-3 flex justify-center 
                         hover:bg-[#0e0d0d] hover:text-white transition duration-200"
+                        onClick={scrollToTop}
                     >
                         Donate
                         {/* Icono de Donate */}
-                    </button>
+                    </Link>
                 </div>
             </div>
         </footer>
