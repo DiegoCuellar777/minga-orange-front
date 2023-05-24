@@ -7,8 +7,8 @@ import { AiOutlineArrowRight, AiOutlineArrowLeft } from "react-icons/ai";
 import mangaNoFound from '../assets/images/R.png'
 import store from "../redux/store"
 import CategoriesList from "../components/CategoriesList"
-import NavPages from "../components/NavPages"
-import MangaCard from "../components/MangaCard"
+import NavPages from "../components/mangas/NavPages"
+import MangaCard from "../components/mangas/MangaCard"
 import ScrollTop from "../components/ScrollTop"
 import BrowserMangas from "../components/BrowserMangas"
 //import BrowserMangas from "../components/BrowserMangas.jsx";

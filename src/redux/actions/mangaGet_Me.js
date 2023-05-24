@@ -42,13 +42,15 @@ const upd_mangas_me = createAsyncThunk('upd_mangas_me', async ({ id, ...data }) 
         const token = localStorage.getItem('token')
         const headers = { headers: { Authorization: `Bearer ${token}` } }
         let response = await axios.put(apiUrl + `mangas/${id}`, data, headers)
+        console.log(response.data.message)
         return {
-            mangas_me: response.data.response
+            mangas_me: response.data.response,
         }
     } catch (error) {
-        console.log(error)
+        console.log(error.response.data.message)
         return {
-            mangas_me: []
+            mangas_me: [],
+            error: error.response.data.message
         }
     }
 })

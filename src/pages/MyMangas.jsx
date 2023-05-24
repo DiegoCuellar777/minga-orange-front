@@ -7,21 +7,23 @@ import categories_actions from '../redux/actions/mangasGet'
 import BrowserMangas from "../components/BrowserMangas.jsx";
 import CategoriesList from "../components/CategoriesList"
 import ScrollTop from "../components/ScrollTop"
-import MangaCard_Me from "../components/MangaCard_Me"
-import ErrorEdit from "../components/ErrorEdit"
-import EditManga from "../components/EditManga"
-import InfoModal from "../components/InfoModal"
-import DeleteMangaAlert from '../components/DeleteMangaAlert.jsx'
-import NewMangaCard from "../components/NewMangaCard";
+import MangaCard_Me from "../components/mymangas/MangaCard_Me.jsx"
+import ErrorEdit from "../components/mymangas/ErrorEdit"
+import EditManga from "../components/mymangas/EditManga"
+import InfoModal from "../components/mymangas/InfoModal"
+import DeleteMangaAlert from '../components/mymangas/DeleteMangaAlert.jsx'
+import NewMangaCard from "../components/mymangas/NewMangaCard";
 
 function MyMangas() {
 
-    const { read_mangas_me } = mangas_actions
+    const { read_mangas_me, delete_mangas_me, upd_mangas_me } = mangas_actions
     const { read_categories } = categories_actions
     const dispatch = useDispatch()
     const store = useSelector(store => store)
+    //console.log(store)
     const categories = useSelector(store => store.mangasGet_reducer.categories)
-    const { delete_mangas_me, upd_mangas_me } = mangas_actions
+    const mangaError = useSelector(store => store.mangasGetMe_reducer.mangas_me)
+    //console.log(mangaError)
     const tit = useRef('')
     const cat = useRef('')
     const [title, setTitleValue] = useState('');
@@ -79,10 +81,10 @@ function MyMangas() {
             setErrorEdit(true)
         }
         if (
-            titleEdit.length !== ""
-            || photoEdit.length !== ""
-            || descEdit.length !== ""
-            || categoryEdit.length !== ""
+            titleEdit.length > 0
+            || photoEdit.length > 0
+            || descEdit.length > 0
+            || categoryEdit.length > 0
         ) {
             dispatch(upd_mangas_me({ id: editItemId, ...data }))
             setIsModalOpen(false)

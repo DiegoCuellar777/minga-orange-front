@@ -1,4 +1,4 @@
-import SelectCategories from "./SelectCategories"
+import SelectCategories from "../SelectCategories"
 
 function EditManga(props) {
 
