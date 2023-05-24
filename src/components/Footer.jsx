@@ -11,6 +11,7 @@ export default function Footer() {
             behavior: 'smooth',
         });
     };
+    
     return (
         <footer className="bg-transparent  text-white">
             <img
