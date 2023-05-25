@@ -2,28 +2,36 @@ import React, { useRef, useState } from "react"
 import axios from "axios"
 import apiUrl from '../../api'
 import { Link as Anchor } from "react-router-dom"
+import { AiOutlineUpload } from "react-icons/ai"
+
 
 export default function EditChapter() {
   let [error, setError] = useState()
   let [message, setmessage] = useState()
   let [success, setSuccess] = useState(false)
 
-  let nameManga = useRef()
-  let coverPhoto = useRef()
-  let order = useRef()
-  let pages = useRef()
+  let nameManga = useRef(null)
+  let coverPhoto = useRef(null)
+  let order = useRef(null)
+  let pages = useRef(null)
   let token = localStorage.getItem('token')
-  let headers = {headers:{'Authorization':`Bearer ${token}`}}
+  let headers = { headers: { 'Authorization': `Bearer ${token}` } }
+
   function handleForm(e) {
     e.preventDefault()
 
-    let data = {
-      title: nameManga.current.value,
-      cover_photo: coverPhoto.current.value,
-      order: order.current.value,
-      pages: pages.current.value.split(',')
-    }
-    axios.post(apiUrl + 'chapters/chapter-form',data,headers)
+    let inputNameManga = nameManga.current.value
+    let inputCoverPhoto = coverPhoto.current.files[0]
+    let inputOrder = order.current.value
+    let inputPages = pages.current.value.split(',')
+
+    const formData = new FormData()
+    formData.append('title', inputNameManga)
+    formData.append('cover_photo', inputCoverPhoto)
+    formData.append('order', inputOrder)
+    formData.append('pages', inputPages)
+
+    axios.post(apiUrl + 'chapters/chapter-form', formData, headers)
       .then(res => {
         console.log(res)
         setSuccess(true)
@@ -63,9 +71,12 @@ export default function EditChapter() {
               </div>
             </div>
           )}
-          <form onSubmit={(e) => handleForm(e)} className="flex flex-col w-[80%] h-[50%] items-center justify-between" action="">
+          <form onSubmit={(e) => handleForm(e)} encType="multipart/form-data" className="flex flex-col w-[80%] h-[50%] items-center justify-between">
             <input type="text" placeholder="Insert title" ref={nameManga} className="w-[280px] border-b-2 border-[#424242] bg-transparent text-white" />
-            <input type="text" placeholder="Insert Url cover photo" ref={coverPhoto} className="w-[280px] border-b-2 border-[#424242] bg-transparent text-white" />
+
+            <input ref={coverPhoto} className="text-[4px] px-[5px] hidden text-black font-montserrat font-[500] outline-none" type="file" name="coverPhoto" id="upload" />
+            <label className="bg-black hover:bg-[#222222d8] text-white cursor-pointer duration-100 flex items-center justify-center font-[600] w-[9rem] h-[1.6rem] text-sm rounded-[0_0_4px_4px]" htmlFor="upload">Upload Image<AiOutlineUpload className="text-lg ml-2" /></label>
+
             <input type='text' placeholder="Insert order" ref={order} className="w-[280px] border-b-2 border-[#424242] bg-transparent text-white"></input>
             <input type="text" placeholder="Insert Url pages" ref={pages} className="w-[280px] border-b-2 border-[#424242] bg-transparent text-white"></input>
             <input className="w-[280px] h-[69px] bg-white text-black rounded-md font-bold text-2xl" type="submit" value='Send'></input>
