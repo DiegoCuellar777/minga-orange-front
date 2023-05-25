@@ -8,8 +8,8 @@ import anime4 from "../assets/images/anime4.png";
 export default function Presentation() {
     return (
         <div className="h-[100vh] flex">
-            <div className="h-[60%] w-[50%] rounded-full bg-gradient-to-r from-black to-[#15803d] blur-[115px]"></div>
-            <div className="h-[60%] w-[50%] rounded-full bg-gradient-to-r from-black to-indigo-600 blur-[115px]"></div>
+            <div className="h-[60%] w-[50%] rounded-full bg-gradient-to-r from-black to-[#15803d] animate-pulse-slow blur-[115px]"></div>
+            <div className="h-[60%] w-[50%] rounded-full bg-gradient-to-r from-black to-indigo-600 animate-pulse-slow blur-[115px]"></div>
             <div className="h-[100vh] w-full absolute top-[25%]">
                 <div className="flex justify-center align-center ">
                     <img
