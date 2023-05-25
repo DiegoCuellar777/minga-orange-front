@@ -94,7 +94,7 @@ export default function Register(props) {
                         <label htmlFor="photo" className="flex flex-col px-4 text-[#1F1F1F7c] mt-4 text-xs">Photo</label>
                         <input type="url" name="photo" id="photo" className="border-b border-[#1f1f1f7c] px-4 text-xs py-2" /* ref={photo} */ />
                         
-                        <input ref={photo} autoComplete="off" className="text-[4px] px-[5px] hidden text-black font-montserrat font-[500] outline-none" type="file" name="cover_photo" id="upload" />
+                        <input ref={photo} autoComplete="off" className="text-[4px] px-[5px] hidden text-black font-montserrat font-[500] outline-none" type="file" name="photo" id="upload" />
                         <label className="bg-black hover:bg-[#222222d8] text-white cursor-pointer duration-100 flex items-center justify-center font-[600] w-[9rem] h-[1.6rem] text-sm rounded-[0_0_4px_4px]" htmlFor="upload">Upload Image<AiOutlineUpload className="text-lg ml-2" /></label>
            
                         <label htmlFor="password" className="flex flex-col px-4 text-[#1F1F1F7c] mt-4 text-xs">Password</label>
