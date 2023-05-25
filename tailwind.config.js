@@ -6,6 +6,10 @@ module.exports = {
 	],
 	theme: {
 		extend: {
+			animation: {
+				'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+				'pulse-md': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+			},
 			fontFamily: {
 				inter: ["Inter", `sans-serif`],
 				montserrat: ["Montserrat", "sans-serif"],

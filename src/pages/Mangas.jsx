@@ -81,7 +81,7 @@ function Mangas() {
     return (
         <>
             <ScrollTop />
-            <div className="md:right-1 md:bottom-[-10rem] md:opacity-60 z-0 md:h-[60%] md:w-[50%] md:absolute rounded-full md:bg-gradient-to-r from-black to-indigo-800 md:blur-[115px]"></div>
+            <div className="md:right-1 md:bottom-[-10rem] md:opacity-60 z-0 md:h-[60%] md:w-[50%] md:absolute rounded-full md:bg-gradient-to-r from-black to-indigo-800 animate-pulse-md md:blur-[115px]"></div>
             <div className="text-white z-1 flex items-start w-full md:min-h-screen">
                 <div className="w-[25%] md:w-[20%] lg:w-[15%] h-[79vw] flex items-start pt-[13rem] justify-center">
                     <div className="flex-col flex gap-3 md:gap-10">
@@ -92,7 +92,7 @@ function Mangas() {
                     </div>
                 </div>
                 <div className="w-[80%] flex flex-col lg:min-h-[83vw] md:w-[80%] lg:w-[80%] lg:ml-10 mt-4">
-                    <h1 className="md:text-[2rem] md:mt-16 md:mb-[3rem]">Search your next manga <span className="drop-shadow-[0_0_30px_rgba(256,150,0,1)]">🤤</span></h1>
+                    <h1 className="md:text-[2rem] md:mt-16 md:mb-[3rem]">Search your next manga <span className="drop-shadow-[0_0_30px_rgba(256,150,0,1)] animate-pulse">🤤</span></h1>
                     <BrowserMangas title={title} setTitleValue={(e)=>dispatchBroser(e)} captureText={captureText} />
                     <div className="md:w-full lg:w-[90%] flex flex-wrap gap-2 md:gap-7 md:mr-2 w-full min-h-[16rem] md:min-h-[34rem] lg:min-h-[60vw] xl:min-h-[54vw]">
                         <MangaCard mangas={mangas} imageMangaNoFound={imageMangaNoFound} />
