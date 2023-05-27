@@ -1,4 +1,3 @@
-import React from "react"
 import { useState } from "react"
 import Register from "./Register"
 import LogIn from "./LogIn"

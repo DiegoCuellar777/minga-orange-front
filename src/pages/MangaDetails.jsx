@@ -1,14 +1,14 @@
 import axios from 'axios'
-import { Link as Anchor, useNavigate, useParams } from "react-router-dom"
-import { useEffect, useState, useRef } from 'react'
+import { Link as Anchor, useParams } from "react-router-dom"
+import { useEffect, useState, } from 'react'
 import apiUrl from '../../api.js'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import mangasActions from '../redux/actions/mangas'
 import Nav from '../components/Nav.jsx';
 
 export default function MangaDetails() {
   const { readOneManga } = mangasActions
-  const store = useSelector(store => console.log('STORE ', store))
+  //const store = useSelector(store => console.log('STORE ', store))
   let token = localStorage.getItem('token')
   let headers = { headers: { 'Authorization': `Bearer ${token}` } }
   const dispatch = useDispatch()

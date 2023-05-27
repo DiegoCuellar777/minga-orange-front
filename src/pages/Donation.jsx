@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
 import apiUrl from '../../api';
+import image from '../assets/images/dona.png'
+import image2 from '../assets/images/dona2.png'
+import { FaDonate } from 'react-icons/fa'
 
 const Donation = () => {
     initMercadoPago("TEST-91e1404f-680a-4d36-be08-9236755ac2a1");
@@ -36,47 +39,55 @@ const Donation = () => {
         <>
             {preferenceId === false ?
                 <div className='text-white h-screen flex flex-col justify-center items-center bg-[url(images/donate-image.png)] bg-no-repeat bg-cover'>
-                    <h1 className='text-[2rem] mb-[10%] pr-[2%] font-extrabold drop-shadow-lg'>
-                        Donation page
-                    </h1>
-                    <div className='flex flex-col sm:flex-row justify-center items-center gap-4'>
-                        <div
-                            class="flex flex-col rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700 md:max-w-xl md:flex-row">
-                            <div class="flex flex-col justify-center items-center p-6">
-                                <h5
-                                    class="mb-2 text-xl font-medium text-neutral-800 dark:text-neutral-50">
-                                    Donation of $1000
-                                </h5>
-                                <button className='w-[80%] transition duration-300 ease-in-out bg-[#138bfb] hover:bg-[#1351fb] text-white font-bold py-2 px-4 rounded-[1rem]'
-                                    onClick={() => handleDonation(1000)}>
-                                    Donate
-                                </button>
+                    <div className='absolute w-full h-full z-20'>
+                        <div className=' bg-gradient-to-b from-[#fff0] to-black absolute w-full h-[40%] bottom-0'></div>
+                        <img src={image} className='absolute w-[25%] bottom-0 left-[-10px] z-0'/>
+                        <img src={image2} className='absolute w-[30%] top-8 right-4 z-0'/>
+                    </div>
+                    <div className='bg-[#1111116c] w-full h-full absolute z-10'></div>
+                    <div className='bg-[#6e6e6e3d] border-[1px] border-[#a7a7a742] rounded-lg duration-200 backdrop-blur-[2px] hover:backdrop-blur-[4px] z-20 w-[62%] h-[50%] flex flex-col items-center justify-around'>
+                        <h1 className='text-[2.8rem] pr-[2%] flex font-extrabold'>
+                            Donation page <FaDonate className='w-8 animate-bounce ml-2 mt-[13px]'/>
+                        </h1>
+                        <div className='flex flex-col sm:flex-row justify-center items-center gap-6'>
+                            <div
+                                className="flex flex-col rounded-lg bg-white shadow-[0_2px_12px_-3px_rgba(0,0,0,0.1),0_10px_15px_-2px_rgba(0,0,0,0.05)] dark:bg-white md:max-w-xl md:flex-row">
+                                <div className="flex flex-col justify-center items-center p-6">
+                                    <h5
+                                        className="mb-2 text-lg font-semibold text-neutral-800 dark:text-neutral-800">
+                                        Donation of $1.000
+                                    </h5>
+                                    <button className='w-[80%] transition duration-200 ease-in-out bg-[#138bfb] hover:bg-[#0471d8] text-white font-bold py-2 px-4 rounded-md'
+                                        onClick={() => handleDonation(1000)}>
+                                        Donate
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                        <div
-                            class="flex flex-col rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700 md:max-w-xl md:flex-row">
-                            <div class="flex flex-col justify-center items-center p-6">
-                                <h5
-                                    class="mb-2 text-xl font-medium text-neutral-800 dark:text-neutral-50">
-                                    Donation of $5000
-                                </h5>
-                                <button className='w-[80%] transition duration-300 ease-in-out bg-[#138bfb] hover:bg-[#1351fb] text-white font-bold py-2 px-4 rounded-[1rem]'
-                                    onClick={() => handleDonation(5000)}>
-                                    Donate
-                                </button>
+                            <div
+                                className="flex flex-col rounded-lg bg-white shadow-[0_2px_12px_-3px_rgba(0,0,0,0.1),0_10px_15px_-2px_rgba(0,0,0,0.05)] dark:bg-white md:max-w-xl md:flex-row">
+                                <div className="flex flex-col justify-center items-center p-6">
+                                    <h5
+                                        className="mb-2 text-lg font-semibold text-neutral-800 dark:text-neutral-800">
+                                        Donation of $5.000
+                                    </h5>
+                                    <button className='w-[80%] transition duration-200 ease-in-out bg-[#138bfb] hover:bg-[#0471d8] text-white font-bold py-2 px-4 rounded-md'
+                                        onClick={() => handleDonation(5000)}>
+                                        Donate
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                        <div
-                            class="flex flex-col rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700 md:max-w-xl md:flex-row">
-                            <div class="flex flex-col justify-center items-center p-6">
-                                <h5
-                                    class="mb-2 text-xl font-medium text-neutral-800 dark:text-neutral-50">
-                                    Donation of $10000
-                                </h5>
-                                <button className='w-[80%] transition duration-300 ease-in-out bg-[#138bfb] hover:bg-[#1351fb] text-white font-bold py-2 px-4 rounded-[1rem]'
-                                    onClick={() => handleDonation(10000)}>
-                                    Donate
-                                </button>
+                            <div
+                                className="flex flex-col rounded-lg bg-white shadow-[0_2px_12px_-3px_rgba(0,0,0,0.1),0_10px_15px_-2px_rgba(0,0,0,0.05)] dark:bg-white md:max-w-xl md:flex-row">
+                                <div className="flex flex-col justify-center items-center p-6">
+                                    <h5
+                                        className="mb-2 text-lg font-semibold text-neutral-800 dark:text-neutral-800">
+                                        Donation of $10.000
+                                    </h5>
+                                    <button className='w-[80%] transition duration-200 ease-in-out bg-[#138bfb] hover:bg-[#0471d8] text-white font-bold py-2 px-4 rounded-md'
+                                        onClick={() => handleDonation(10000)}>
+                                        Donate
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -89,7 +100,7 @@ const Donation = () => {
                                     Want to donate ${amount}?
                                 </p>
                                 <Wallet initialization={{ preferenceId: preferenceId, redirectMode: 'modal' }} customization={customization} />
-                                <button className='transition duration-300 ease-in-out bg-[#fb1316] hover:bg-[#ae0d0f] text-white font-bold py-2 px-4 rounded-[1rem] ' onClick={() => setPreferenceId(false)}>Cancel</button>
+                                <button className='transition duration-200 ease-in-out bg-[#fb1316] hover:bg-[#ae0d0f] text-white font-bold py-2 px-4 rounded-[1rem] ' onClick={() => setPreferenceId(false)}>Cancel</button>
                             </div>
                         </div>
                     </div>
