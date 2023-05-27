@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react"
+import { useRef, useState } from "react"
 import axios from "axios"
 import apiUrl from '../../api'
 import { Link as Anchor } from "react-router-dom"

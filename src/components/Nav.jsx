@@ -39,7 +39,7 @@ export default function Nav() {
     
 
     return (
-        <nav className="fixed h-[10vh] flex justify-between p-4 w-full z-40 border-gradient-to-r from-transparent to-transparent via-white">
+        <nav className="fixed h-[10vh] flex justify-between p-4 w-full z-40 bg-gradient-to-t from-[#0000] to-[#0000009a] ">
             <button className="contents" onClick={handleMenuClick}>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -82,7 +82,7 @@ export default function Nav() {
                             {token && <Anchor to={"/mangas/1"} className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]">Mangas</Anchor>}
                             {role >= 1 && <Anchor to={'/mymangas'} className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]">My Mangas</Anchor>}
                             {role >= 1 && <Anchor to={'/manga-form'} className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]">New Manga</Anchor>}
-                            {token && <Anchor className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]">Favourites</Anchor>}
+                            {token && <Anchor to={'/favourites'} className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]">Favourites</Anchor>}
                             {token && <Anchor className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]" onClick={backHome}>Logout</Anchor>}
                             {token && <Anchor to={'/chapter-form'} className=" p-2 hover:bg-white text-white hover:text-black rounded-[8px] w-[95%]">New Chapter</Anchor>}
                         </ul>

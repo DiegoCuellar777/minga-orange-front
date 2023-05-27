@@ -13,7 +13,7 @@ export default function Footer() {
     };
     
     return (
-        <footer className="bg-transparent  text-white">
+        <footer className="bg-transparent text-white relative z-20">
             <img
                 className="w-[100vw] rounded-[100%_100%_100%_100%/_0%_0%_100%_100%]"
                 src={imgFooter}

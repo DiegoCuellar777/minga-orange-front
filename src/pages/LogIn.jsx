@@ -1,4 +1,3 @@
-import React from "react"
 import { Link as Anchor, useNavigate } from "react-router-dom"
 import { useRef } from "react";
 import axios from "axios";

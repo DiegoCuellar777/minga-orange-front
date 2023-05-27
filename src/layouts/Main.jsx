@@ -20,7 +20,8 @@ export default function Main() {
         '/new-role',
         '/admin',
         '/mymangas',
-        '/donation'
+        '/donation',
+        '/favourites'
     ];
 
     const viewNav = navRoutes.includes(location.pathname);
