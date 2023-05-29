@@ -3,7 +3,7 @@ import apiUrl from "../../../api";
 import axios from "axios";
 
 const user = JSON.parse(localStorage.getItem("user"));
-const userId = user.id;
+const userId = user?.id;
 const token = localStorage.getItem("token");
 const headers = { headers: { "Authorization": `Bearer ${token}` } }
 
