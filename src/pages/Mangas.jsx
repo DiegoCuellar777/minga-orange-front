@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react"
-import { useNavigate, useParams } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from 'react-redux'
 import actions from '../redux/actions/mangasCards'
 import mangas_actions from '../redux/actions/mangasGet'
 import { AiOutlineArrowRight, AiOutlineArrowLeft } from "react-icons/ai";
 import mangaNoFound from '../assets/images/R.png'
-import store from "../redux/store"
 import CategoriesList from "../components/CategoriesList"
 import NavPages from "../components/mangas/NavPages"
 import MangaCard from "../components/mangas/MangaCard"
@@ -18,7 +17,6 @@ const { read_mangas, read_categories } = mangas_actions
 
 function Mangas() {
 
-    const store = useSelector(store => store)
     const imageMangaNoFound = <img className="w-[10rem] absolute right-100 bottom-52" src={mangaNoFound} alt="mangaNofound" />
     const mangas = useSelector(store => store.mangasGet_reducer.mangas)
     const categories = useSelector(store => store.mangasGet_reducer.categories)

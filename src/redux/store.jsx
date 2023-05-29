@@ -10,6 +10,7 @@ import { reducer as mangasReducer, reducerAsync as mangaReducerAsync } from './r
 import { reducer as chapterReducer, reducer_get_chapters } from "./reducers/chapterData";
 import mangasGet_reducer from './reducers/mangasGet'
 import mangasGetMe_reducer from './reducers/mangaGet_Me'
+import reactionLD from '../redux/reducers/reactionsLD'
 
 const store = configureStore({
     reducer: {
@@ -24,7 +25,8 @@ const store = configureStore({
         authors: authors,
         commentStore: commentReducer,
         mangasGet_reducer,
-        mangasGetMe_reducer
+        mangasGetMe_reducer,
+        reactionLD
     }
 });
 
