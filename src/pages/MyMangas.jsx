@@ -1,7 +1,5 @@
 import { useState, useEffect, useRef } from "react"
-import { Link as Anchor, useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from 'react-redux'
-import { AiOutlineArrowRight, AiOutlineArrowLeft } from "react-icons/ai";
 import mangas_actions from '../redux/actions/mangaGet_Me'
 import categories_actions from '../redux/actions/mangasGet'
 import BrowserMangas from "../components/BrowserMangas.jsx";
@@ -22,7 +20,6 @@ function MyMangas() {
     const store = useSelector(store => store)
     //console.log(store)
     const categories = useSelector(store => store.mangasGet_reducer.categories)
-    const mangaError = useSelector(store => store.mangasGetMe_reducer.mangas_me)
     //console.log(mangaError)
     const tit = useRef('')
     const cat = useRef('')
