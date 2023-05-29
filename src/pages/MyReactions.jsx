@@ -2,16 +2,15 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import BrowserMangas from '../components/BrowserMangas.jsx'
 import { BiSortZA, BiSortAZ } from 'react-icons/bi'
-import apiUrl from "../../api.js"
-import axios from "axios"
 import { useDispatch, useSelector } from "react-redux"
 import categories_actions from '../redux/actions/mangasGet'
+import reactions_actions from '../redux/actions/reactionsLD_action.js'
 import CategoriesListHorizontal from "../components/CategoriesListHorizontal.jsx"
 
 
 function MyReactions() {
 
-  const [reactions, setReactions] = useState(null)
+  const [title, setTitleValue] = useState('');
   const [isSort, setIsSort] = useState(false)
   const [sort, setSort] = useState(false)
   const [cates, setCates] = useState([])
@@ -20,7 +19,9 @@ function MyReactions() {
   const navigate = useNavigate();
   const dispatch = useDispatch()
   const { read_categories } = categories_actions
+  const { read_reactionsFav } = reactions_actions
   const categories = useSelector(store => store.mangasGet_reducer.categories)
+  const reactions = useSelector(store => store.reactionLD.reaction)
 
   function SORT(boolean) {
     if (sort == false) {
@@ -49,20 +50,14 @@ function MyReactions() {
   };
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    const userId = user.id;
-    const token = localStorage.getItem("token");
-    const headers = { headers: { "Authorization": `Bearer ${token}` } };
-
-    axios.get(`${apiUrl}reactions?name=like&sort=${order}`, headers, userId)
+    dispatch(read_reactionsFav({ title: title || "", cates, order }))
       .then((res) => {
         console.log(res.data.reaction);
-        setReactions(res.data.reaction);
       })
       .catch(err => {
         console.log(err);
       });
-  }, [sort]);
+  }, [sort, cates, title]);
 
   useEffect(
     () => {
@@ -79,7 +74,7 @@ function MyReactions() {
         <div className="md:right-1 md:bottom-[-2rem] md:opacity-60 z-0 md:h-[60%] md:w-[50%] md:absolute rounded-full md:bg-gradient-to-r from-black to-indigo-700 animate-pulse-md md:blur-[115px]"></div>
         <div className="flex text-white w-full h-full flex-col items-center relative">
           <h1 className="mt-[6rem] text-2xl md:mb-5 md:text-[2rem]">Favourites</h1>
-          <BrowserMangas />
+          <BrowserMangas title={title} setTitleValue={(e)=>setTitleValue(e.target.value)} />
           <div className="flex flex-col w-full h-full items-center">
             <div className="flex w-[80%] items-center mb-[2rem] justify-center md:mb-[3rem]">
               <div className="md:w-[38%]">
