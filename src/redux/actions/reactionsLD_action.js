@@ -49,6 +49,18 @@ const read_reactions = createAsyncThunk('read_reactions', async () => {
     }
 });
 
-const actions = { post_reactions, read_reactions, upd_reactions, delete_reactions };
+const read_reactionsFav = createAsyncThunk('read_reactionsFav', async ({title , cates, order}) => {
+    try {
+        let res = await axios.get(`${apiUrl}reactions?name=like&sort=${order}`, headers, userId)
+        return {
+            reaction: res.data.reaction,
+            title,
+            cates,
+        };
+    } catch (error) {
+        return { error: "Error al obtener las reacciones" };
+    }
+});
+const actions = { post_reactions, read_reactions, read_reactionsFav, upd_reactions, delete_reactions };
 
 export default actions;
