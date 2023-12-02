@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect } from "react"
 import { useSelector, useDispatch } from 'react-redux'
 import mangas_actions from '../redux/actions/mangaGet_Me'
 import categories_actions from '../redux/actions/mangasGet'
@@ -17,12 +17,9 @@ function MyMangas() {
     const { read_mangas_me, delete_mangas_me, upd_mangas_me } = mangas_actions
     const { read_categories } = categories_actions
     const dispatch = useDispatch()
-    const store = useSelector(store => store)
     //console.log(store)
     const categories = useSelector(store => store.mangasGet_reducer.categories)
     //console.log(mangaError)
-    const tit = useRef('')
-    const cat = useRef('')
     const [title, setTitleValue] = useState('');
     const [cates, setCates] = useState([])
     const [elementId, setElementId] = useState('');
